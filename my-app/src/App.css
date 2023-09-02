@@ -5,3 +5,8 @@
   -o-user-select:none;
   user-select:none; */
 }
+
+.card-zoom {
+  width: 300px;
+  height: 300px;
+}
