@@ -1,2 +1,6 @@
 
 my-app/.idea/
+
+cordova-app/www/
+
+node_modules/

@@ -1,13 +1,30 @@
 import './App.css';
 import { Rnd } from "react-rnd";
+import { useState } from 'react';
 
-import hk from "./assets/cards/hk_compressed.jpg";
+import hkCard from "./assets/cards/hk_compressed.jpg";
+
+import cqCard from "./assets/cards/cq_compressed.jpg";
+
 
 function App() {
+
+  const [showCardSrc, setShowCardSrc] = useState(hkCard);
+
+
+  function hideCard() {
+    if (showCardSrc === hkCard) {
+      // TODO: 需修正成卡片背面
+      setShowCardSrc(cqCard);
+    }
+  }
+
+
+
   return (
     <div className="App">
 
-      <div class="card-zoom">
+      <div className="card-zoom">
 
       <Rnd
         default={{
@@ -16,10 +33,10 @@ function App() {
         }}
         bounds={'parent'}
       >
-        <div>
+        <div onClick={hideCard} onTouchStart={hideCard}>
           <img
             className="Cannot-select"
-            src={hk}
+            src={showCardSrc}
             width={80}
             alt="hk_compressed"
             draggable="false"
