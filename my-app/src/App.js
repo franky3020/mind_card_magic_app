@@ -11,29 +11,33 @@ function App() {
 
   const [showCardSrc, setShowCardSrc] = useState(hkCard);
 
-
-  function hideCard() {
+  function hideCard(e) {
     if (showCardSrc === hkCard) {
       // TODO: 需修正成卡片背面
       setShowCardSrc(cqCard);
     }
+    
+  }
+
+  function onDragStart(e, data) {
+    console.log(e);
+    console.log(data);
+    hideCard();
   }
 
 
 
   return (
     <div className="App">
-
-      <div className="card-zoom">
-
       <Rnd
         default={{
           x: 100,
           y: 100,
         }}
         bounds={'parent'}
+        onDragStart={onDragStart}
       >
-        <div onClick={hideCard} onTouchStart={hideCard}>
+        <div onClick={hideCard}>
           <img
             className="Cannot-select"
             src={showCardSrc}
@@ -42,10 +46,7 @@ function App() {
             draggable="false"
           />
         </div>
-
       </Rnd>
-
-      </div>
     </div>
   );
 }
