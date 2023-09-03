@@ -20,8 +20,6 @@ function App() {
   }
 
   function onDragStart(e, data) {
-    console.log(e);
-    console.log(data);
     hideCard();
   }
 
@@ -33,6 +31,63 @@ function App() {
         default={{
           x: 100,
           y: 100,
+        }}
+        bounds={'parent'}
+        onDragStart={onDragStart}
+      >
+        <div onClick={hideCard}>
+          <img
+            className="Cannot-select"
+            src={showCardSrc}
+            width={80}
+            alt="hk_compressed"
+            draggable="false"
+          />
+        </div>
+      </Rnd>
+
+      <Rnd
+        default={{
+          x: 200,
+          y: 200,
+        }}
+        bounds={'parent'}
+        onDragStart={onDragStart}
+      >
+        <div onClick={hideCard}>
+          <img
+            className="Cannot-select"
+            src={showCardSrc}
+            width={80}
+            alt="hk_compressed"
+            draggable="false"
+          />
+        </div>
+      </Rnd>
+
+      <Rnd
+        default={{
+          x: 100,
+          y: 300,
+        }}
+        bounds={'parent'}
+        onDragStart={onDragStart}
+      >
+        <div onClick={hideCard}>
+          <img
+            className="Cannot-select"
+            src={showCardSrc}
+            width={80}
+            alt="hk_compressed"
+            draggable="false"
+          />
+        </div>
+      </Rnd>
+
+      <Rnd
+        default={{
+          x: 200,
+          y: 400,
         }}
         bounds={'parent'}
         onDragStart={onDragStart}
