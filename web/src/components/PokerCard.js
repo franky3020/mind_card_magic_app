@@ -4,7 +4,7 @@ import { useState } from "react";
 import hkCard from "../assets/cards/hk_compressed.jpg";
 import cqCard from "../assets/cards/cq_compressed.jpg";
 
-export function PokerCard() {
+export function PokerCard({cardLocation}) {
   const [showCardSrc, setShowCardSrc] = useState(hkCard);
 
   function hideCard(e) {
@@ -21,8 +21,8 @@ export function PokerCard() {
   return (
     <Rnd
       default={{
-        x: 100,
-        y: 100,
+        x: cardLocation.x,
+        y: cardLocation.y,
       }}
       bounds={"parent"}
       onDragStart={onDragStart}
