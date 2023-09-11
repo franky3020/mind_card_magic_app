@@ -1,15 +1,19 @@
 import "./App.css";
 import { PokerCard } from "./components/PokerCard";
+import {CardLocalCalculator} from "./service/CardLocalCalculator";
 
 function App() {
 
+  const cardLocalCalculator = new CardLocalCalculator(851, 393, 80, 112);
+  const topLeftCardX = cardLocalCalculator.getLeftX();
+  const topMidCardX = cardLocalCalculator.getMidX();
+  const topRightCardX = cardLocalCalculator.getRightX();
+  
   return (
     <div className="App">
-      <PokerCard cardLocation={{x: 20, y: 20}}/>
-      <PokerCard cardLocation={{x: 40, y: 40}}/>
-      <PokerCard cardLocation={{x: 60, y: 60}}/>
-      <PokerCard cardLocation={{x: 80, y: 80}}/>
-      <PokerCard cardLocation={{x: 100, y: 100}}/>
+      <PokerCard cardLocation={{x: topLeftCardX, y: 80}}/>
+      <PokerCard cardLocation={{x: topMidCardX, y: 80}}/>
+      <PokerCard cardLocation={{x: topRightCardX, y: 80}}/>
     </div>
   );
 }
