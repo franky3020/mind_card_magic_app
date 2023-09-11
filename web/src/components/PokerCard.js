@@ -31,7 +31,7 @@ export function PokerCard({cardLocation}) {
       <div onClick={hideCard}>
         <img
           src={showCardSrc}
-          width={80}
+          width={120}
           alt="hk_compressed"
           draggable="false"
         />
