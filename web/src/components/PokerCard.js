@@ -7,6 +7,9 @@ import cqCard from "../assets/cards/cq_compressed.jpg";
 export function PokerCard({cardLocation}) {
   const [showCardSrc, setShowCardSrc] = useState(hkCard);
 
+  const [cardx, setCardx] = useState(cardLocation.x);
+  const [cardy, setCardy] = useState(cardLocation.y);
+
   function hideCard(e) {
     if (showCardSrc === hkCard) {
       // TODO: 需修正成卡片背面
@@ -16,6 +19,10 @@ export function PokerCard({cardLocation}) {
 
   function onDragStart(e, data) {
     hideCard();
+    setInterval(() => {
+      setCardx((x) => x + 1);
+      setCardy((y) => y + 1);
+    }, 1);
   }
 
   return (
@@ -27,6 +34,7 @@ export function PokerCard({cardLocation}) {
       bounds={"parent"}
       onDragStart={onDragStart}
       enableResizing={false}
+      position={{x: cardx, y: cardy}}
     >
       <div onClick={hideCard}>
         <img
