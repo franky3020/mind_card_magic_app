@@ -4,7 +4,7 @@ import { useState } from "react";
 import hkCard from "../assets/cards/hk_compressed.jpg";
 import cqCard from "../assets/cards/cq_compressed.jpg";
 
-export function PokerCard({cardLocation, cardWidth, maxX}) {
+export function PokerCard({cardLocation, cardWidth, maxX, maxY}) {
   const [showCardSrc, setShowCardSrc] = useState(hkCard);
 
   const [cardx, setCardx] = useState(cardLocation.x);
@@ -28,6 +28,15 @@ export function PokerCard({cardLocation, cardWidth, maxX}) {
 
         return newPositionX;
       });
+
+      setCardy((y) => {
+        let newPositionY = y + 1;
+        if (newPositionY + cardWidth*1.4 > maxY) {
+          newPositionY = y;
+        }
+        return newPositionY;
+      });
+
     }, 1);
   }
 
