@@ -4,7 +4,7 @@ import { useState } from "react";
 import hkCard from "../assets/cards/hk_compressed.jpg";
 import cqCard from "../assets/cards/cq_compressed.jpg";
 
-export function PokerCard({cardLocation}) {
+export function PokerCard({cardLocation, cardWidth, maxX}) {
   const [showCardSrc, setShowCardSrc] = useState(hkCard);
 
   const [cardx, setCardx] = useState(cardLocation.x);
@@ -20,8 +20,14 @@ export function PokerCard({cardLocation}) {
   function onDragStart(e, data) {
     hideCard();
     setInterval(() => {
-      setCardx((x) => x + 1);
-      setCardy((y) => y + 1);
+      setCardx((x) => {
+        let newPositionX = x + 1;
+        if (newPositionX + cardWidth > maxX) {
+          newPositionX = x;
+        }
+
+        return newPositionX;
+      });
     }, 1);
   }
 
@@ -39,7 +45,7 @@ export function PokerCard({cardLocation}) {
       <div onClick={hideCard}>
         <img
           src={showCardSrc}
-          width={120}
+          width={cardWidth}
           alt="hk_compressed"
           draggable="false"
         />

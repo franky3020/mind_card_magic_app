@@ -13,13 +13,13 @@ function App() {
   
   return (
     <div className="App">
-      <PokerCard cardLocation={{x: topLeftCardX, y: 20}}/>
-      <PokerCard cardLocation={{x: topMidCardX, y: 20}}/>
+      <PokerCard cardLocation={{x: topLeftCardX, y: 20}} cardWidth={120} maxX={851}/>
+      {/* <PokerCard cardLocation={{x: topMidCardX, y: 20}}/>
       <PokerCard cardLocation={{x: topRightCardX, y: 20}}/>
 
       <PokerCard cardLocation={{x: topLeftCardX, y: 200}}/>
       <PokerCard cardLocation={{x: topMidCardX, y: 200}}/>
-      <PokerCard cardLocation={{x: topRightCardX, y: 200}}/>
+      <PokerCard cardLocation={{x: topRightCardX, y: 200}}/> */}
     </div>
   );
 }
