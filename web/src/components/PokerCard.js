@@ -7,8 +7,7 @@ import cqCard from "../assets/cards/cq_compressed.jpg";
 export function PokerCard({cardLocation, cardWidth, maxX, maxY}) {
   const [showCardSrc, setShowCardSrc] = useState(hkCard);
 
-  const [cardx, setCardx] = useState(cardLocation.x);
-  const [cardy, setCardy] = useState(cardLocation.y);
+  const [clickTime, setClickTime] = useState(0);
 
   function hideCard(e) {
     if (showCardSrc === hkCard) {
@@ -18,26 +17,16 @@ export function PokerCard({cardLocation, cardWidth, maxX, maxY}) {
   }
 
   function onDragStart(e, data) {
+    showTime();
     hideCard();
-    setInterval(() => {
-      setCardx((x) => {
-        let newPositionX = x + 1;
-        if (newPositionX + cardWidth > maxX) {
-          newPositionX = x;
-        }
-
-        return newPositionX;
-      });
-
-      setCardy((y) => {
-        let newPositionY = y + 1;
-        if (newPositionY + cardWidth*1.4 > maxY) {
-          newPositionY = y;
-        }
-        return newPositionY;
-      });
-
-    }, 1);
+  }
+  
+  function showTime() {
+    // 需在這計算兩次按下的間隔時間 判對是否為有效
+    setClickTime((x) => {
+      return x + 1;
+    })
+    console.log("franky-showTime: ", clickTime);
   }
 
   return (
@@ -49,9 +38,8 @@ export function PokerCard({cardLocation, cardWidth, maxX, maxY}) {
       bounds={"parent"}
       onDragStart={onDragStart}
       enableResizing={false}
-      position={{x: cardx, y: cardy}}
     >
-      <div onClick={hideCard}>
+      <div>
         <img
           src={showCardSrc}
           width={cardWidth}
