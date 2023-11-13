@@ -9,6 +9,10 @@ export function PokerCard({cardLocation, cardWidth, maxX, maxY}) {
 
   const [clickTime, setClickTime] = useState(0);
 
+  const [firstPressTime, setFirstPressTime] = useState(0);
+
+  const [secondPressTime, setSecondPressTime] = useState(0);
+
   function hideCard(e) {
     if (showCardSrc === hkCard) {
       // TODO: 需修正成卡片背面
@@ -17,16 +21,39 @@ export function PokerCard({cardLocation, cardWidth, maxX, maxY}) {
   }
 
   function onDragStart(e, data) {
-    showTime();
-    hideCard();
+    changeCard();
   }
   
-  function showTime() {
-    // 需在這計算兩次按下的間隔時間 判對是否為有效
-    setClickTime((x) => {
-      return x + 1;
-    })
-    console.log("franky-showTime: ", clickTime);
+  function changeCard() {
+    // 測試快速按兩下 才會變換卡片
+    
+    if (firstPressTime === 0) {
+      setFirstPressTime((x) => {
+        return new Date().getTime();
+      });
+      setTimeout(() => {
+        setFirstPressTime((x) => {
+          return 0;
+        })
+      }, 250);
+    } else {
+      setSecondPressTime((x) => {
+
+        let nowTime = new Date().getTime();
+        let timeSpan = nowTime - firstPressTime;
+        console.log("click: ", nowTime - firstPressTime);
+        if (timeSpan < 300) {
+          hideCard();
+        }
+        return nowTime;
+      })
+      setFirstPressTime((x) => {
+        return 0;
+      })
+      setSecondPressTime((x) => {
+        return 0;
+      })
+    }
   }
 
   return (
