@@ -4,9 +4,8 @@ import { useState } from "react";
 import hkCard from "../assets/cards/hk_compressed.jpg";
 import cqCard from "../assets/cards/cq_compressed.jpg";
 
-export function PokerCard({cardLocation, cardWidth, cardImg}) {
-  
-  let initCard = cardImg;
+export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {}}) {
+
   const [showCardSrc, setShowCardSrc] = useState(cardImg);
 
   const [clickTime, setClickTime] = useState(0);
@@ -16,9 +15,13 @@ export function PokerCard({cardLocation, cardWidth, cardImg}) {
   const [secondPressTime, setSecondPressTime] = useState(0);
 
   function hideCard(e) {
-    if (showCardSrc === initCard) {
+    if (showCardSrc !== cardImg) {
       // TODO: 需修正成卡片背面
+      setShowCardSrc(cardImg);
+      onCardChange("show");
+    } else {
       setShowCardSrc(cqCard);
+      onCardChange("n_hide");
     }
   }
 
