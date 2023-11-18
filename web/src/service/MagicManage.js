@@ -3,6 +3,7 @@ class _MagicManage {
   
   constructor() {
     this.countHideCard = 0;
+    this.isHideCardMode = false;
   }
   addHideCard() {
     this.countHideCard++;
@@ -10,6 +11,14 @@ class _MagicManage {
 
   subHideCard() {
     this.countHideCard--;
+  }
+
+  openHideCardMode() {
+    this.isHideCardMode = true;
+  }
+
+  closeHideCardMode() {
+    this.isHideCardMode = false;
   }
 }
 

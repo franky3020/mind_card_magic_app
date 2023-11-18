@@ -1,27 +1,22 @@
 import { Rnd } from "react-rnd";
 import { useState } from "react";
 
-import hkCard from "../assets/cards/hk_compressed.jpg";
-import cqCard from "../assets/cards/cq_compressed.jpg";
+import sjCard from "../assets/cards/sj_compressed.jpg";
 
-export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {}}) {
+export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {}, hideCard = false}) {
 
   const [showCardSrc, setShowCardSrc] = useState(cardImg);
-
-  const [clickTime, setClickTime] = useState(0);
-
   const [firstPressTime, setFirstPressTime] = useState(0);
 
-  const [secondPressTime, setSecondPressTime] = useState(0);
+  const cardStyle = hideCard ? {"display": "none"} : {};
 
-  function hideCard(e) {
+  function openOrFoldCard(e) {
     if (showCardSrc !== cardImg) {
-      // TODO: 需修正成卡片背面
       setShowCardSrc(cardImg);
-      onCardChange("show");
+      onCardChange("open");
     } else {
-      setShowCardSrc(cqCard);
-      onCardChange("n_hide");
+      setShowCardSrc(sjCard); // TODO: 需修正成卡片背面
+      onCardChange("fold");
     }
   }
 
@@ -42,20 +37,13 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
         })
       }, 250);
     } else {
-      setSecondPressTime((x) => {
-
-        let nowTime = new Date().getTime();
-        let timeSpan = nowTime - firstPressTime;
-        console.log("click: ", nowTime - firstPressTime);
-        if (timeSpan < 300) {
-          hideCard();
-        }
-        return nowTime;
-      })
+      let nowTime = new Date().getTime();
+      let timeSpan = nowTime - firstPressTime;
+      console.log("click: ", nowTime - firstPressTime);
+      if (timeSpan < 300) {
+        openOrFoldCard();
+      }
       setFirstPressTime((x) => {
-        return 0;
-      })
-      setSecondPressTime((x) => {
         return 0;
       })
     }
@@ -70,12 +58,13 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
       bounds={"parent"}
       onDragStart={onDragStart}
       enableResizing={false}
+      style={cardStyle}
     >
       <div>
         <img
           src={showCardSrc}
           width={cardWidth}
-          alt="hk_compressed"
+          alt="card"
           draggable="false"
         />
       </div>
