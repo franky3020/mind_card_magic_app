@@ -1,7 +1,7 @@
 import { Rnd } from "react-rnd";
 import { useState } from "react";
 
-import sjCard from "../assets/cards/sj_compressed.jpg";
+import flod_card from "../assets/cards/flod_card.jpg";
 
 export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {}, hideCard = false}) {
 
@@ -15,7 +15,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
       setShowCardSrc(cardImg);
       onCardChange("open");
     } else {
-      setShowCardSrc(sjCard); // TODO: 需修正成卡片背面
+      setShowCardSrc(flod_card);
       onCardChange("fold");
     }
   }

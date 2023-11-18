@@ -2,14 +2,22 @@ import "./App.css";
 import { PokerCard } from "./components/PokerCard";
 import {CardLocalCalculator} from "./service/CardLocalCalculator";
 
-import hkCard from "./assets/cards/hk_compressed.jpg";
+
 import skCard from "./assets/cards/sk_compressed.jpg";
+import hkCard from "./assets/cards/hk_compressed.jpg";
+import dkCard from "./assets/cards/dk_compressed.jpg";
+import ckCard from "./assets/cards/ck_compressed.jpg";
+
+import sqCard from "./assets/cards/sq_compressed.jpg";
+import hqCard from "./assets/cards/hq_compressed.jpg";
+import dqCard from "./assets/cards/dq_compressed.jpg";
 import cqCard from "./assets/cards/cq_compressed.jpg";
 
+import sjCard from "./assets/cards/sj_compressed.jpg";
 import hjCard from "./assets/cards/hj_compressed.jpg";
+import djCard from "./assets/cards/dj_compressed.jpg";
 import cjCard from "./assets/cards/cj_compressed.jpg";
-import ckCard from "./assets/cards/ck_compressed.jpg";
-import hqCard from "./assets/cards/hq_compressed.jpg";
+
 import {useState} from "react";
 import MagicManage from "./service/MagicManage";
 
@@ -26,7 +34,13 @@ function App() {
   let topLineY = 20;
   let bottomLineY = 200;
 
-  const [oneCardSrc, setOneCardSrc] = useState(hkCard);
+  const [oneCardSrc, setOneCardSrc] = useState(ckCard); // 對應 skCard
+  const [twoCardSrc, setTwoCardSrc] = useState(hkCard); // 對應 dkCard
+  const [threeCardSrc, setThreeCardSrc] = useState(sqCard);  // 對應 cqCard
+
+  const [fourCardSrc, setFourCardSrc] = useState(dqCard);  // 對應 hqCard
+  const [fiveCardSrc, setFiveCardSrc] = useState(sjCard); // 對應 cjCard
+  const [sixCardSrc, setSixCardSrc] = useState(djCard); // 對應 hjCard
 
   const [oneCardIsHide, setOneCardIsHide] = useState(false);
   const [twoCardIsHide, setTwoCardIsHide] = useState(false);
@@ -41,10 +55,16 @@ function App() {
     let magicManage = MagicManage;
 
     if (magicManage.isHideCardMode) {
+      magicManage.subHideCard();
       hideCardById(cardNumber);
       magicManage.closeHideCardMode();
-      setOneCardSrc(skCard);
       // 換掉其它所有卡片
+      setOneCardSrc(skCard);
+      setTwoCardSrc(dkCard);
+      setThreeCardSrc(cqCard);
+      setFourCardSrc(hqCard);
+      setFiveCardSrc(cjCard);
+      setSixCardSrc(hjCard);
       return;
     }
 
@@ -59,6 +79,7 @@ function App() {
     console.log(magicManage.countHideCard);
     if (magicManage.countHideCard === 6) {
       magicManage.openHideCardMode();
+      
     }
   }
 
@@ -82,6 +103,8 @@ function App() {
       case 6:
         setSixCardIsHide(true);
         break;
+      default:
+        break;
     }
   }
 
@@ -91,20 +114,20 @@ function App() {
                  cardWidth={cardWidth} cardImg={oneCardSrc} 
                  onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 1)}}
                  hideCard={oneCardIsHide} />
-      <PokerCard cardLocation={{x: topMidCardX, y: topLineY}} cardWidth={cardWidth} cardImg={cqCard}
+      <PokerCard cardLocation={{x: topMidCardX, y: topLineY}} cardWidth={cardWidth} cardImg={twoCardSrc}
                  onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 2)}}
                  hideCard={twoCardIsHide} />
-      <PokerCard cardLocation={{x: topRightCardX, y: topLineY}} cardWidth={cardWidth} cardImg={hjCard}
+      <PokerCard cardLocation={{x: topRightCardX, y: topLineY}} cardWidth={cardWidth} cardImg={threeCardSrc}
                  onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 3)}}
                  hideCard={threeCardIsHide}/>
 
-      <PokerCard cardLocation={{x: topLeftCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={cjCard}
+      <PokerCard cardLocation={{x: topLeftCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fourCardSrc}
                  onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 4)}}
                  hideCard={fourCardIsHide}/>
-      <PokerCard cardLocation={{x: topMidCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={ckCard}
+      <PokerCard cardLocation={{x: topMidCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fiveCardSrc}
                  onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 5)}}
                  hideCard={fiveCardIsHide}/>
-      <PokerCard cardLocation={{x: topRightCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={hqCard}
+      <PokerCard cardLocation={{x: topRightCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={sixCardSrc}
                  onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 6)}}
                  hideCard={sixCardIsHide}/>
     </div>
