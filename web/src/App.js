@@ -52,7 +52,7 @@ function App() {
 
   // 左上到右上 123, 左下到右下 456
   function afterCardEffectRun(cardStatue, cardNumber) {
-    let magicManage = MagicManage;
+    const magicManage = MagicManage;
 
     if (magicManage.isHideCardMode) {
       magicManage.closeHideCardMode();

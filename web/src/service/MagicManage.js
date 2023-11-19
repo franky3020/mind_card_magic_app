@@ -4,6 +4,7 @@ class _MagicManage {
   constructor() {
     this.countHideCard = 0;
     this.isHideCardMode = false;
+    this.tableCardMaxZindex = 0;
   }
   addHideCard() {
     this.countHideCard++;
@@ -20,6 +21,10 @@ class _MagicManage {
 
   closeHideCardMode() {
     this.isHideCardMode = false;
+  }
+
+  addTableCardMaxZindex() {
+    this.tableCardMaxZindex++;
   }
 }
 

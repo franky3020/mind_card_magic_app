@@ -2,13 +2,20 @@ import { Rnd } from "react-rnd";
 import { useState } from "react";
 
 import flod_card from "../assets/cards/flod_card.jpg";
+import MagicManage from "../service/MagicManage";
 
+const Efficient_Click_Time_Span = 400;
 export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {}, nextClickToHideCard = false}) {
+
+
+  const magicManage = MagicManage;
 
   const [showCardSrc, setShowCardSrc] = useState(cardImg);
   const [firstPressTime, setFirstPressTime] = useState(0);
 
   const [cardStyle, setCardStyle] = useState({});
+
+  const [firstTimeToZeroTimeoutIdArray, setFirstTimeToZeroTimeoutIdArray] = useState([]);
 
   function runCardEffect(e) {
 
@@ -39,10 +46,12 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
 
   function onDragStart(e, data) {
 
-    setCardStyle((preStyle) => {
-      let newStytle = preStyle;
-      newStytle["zIndex"] = 9;
-      return newStytle;
+    setCardStyle(() => {
+      magicManage.addTableCardMaxZindex();
+      return {
+        "display": cardStyle["display"],
+        "zIndex": magicManage.tableCardMaxZindex
+      };
     });
 
     changeCard();
@@ -50,12 +59,6 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
   }
 
   function onDragStop() {
-    setCardStyle((preStyle) => {
-      let newStytle = preStyle;
-      newStytle["zIndex"] = 0;
-      console.log("franky-test newStytle:", newStytle);
-      return newStytle;
-    });
   }
   
   function changeCard() {
@@ -65,22 +68,43 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
       setFirstPressTime((x) => {
         return new Date().getTime();
       });
-      setTimeout(() => {
-        setFirstPressTime((x) => {
-          return 0;
-        })
-      }, 250);
+
+      setFirstTimeToZeroTimeoutIdArray(() => {
+        const timeoutId = setTimeout(() => {
+          setFirstPressTime(() => {
+            return 0;
+          })
+          clearTimeoutArray(firstTimeToZeroTimeoutIdArray);
+        }, Efficient_Click_Time_Span);
+
+        const result = [...firstTimeToZeroTimeoutIdArray, timeoutId];
+        return result;
+      })
+      
     } else {
       let nowTime = new Date().getTime();
       let timeSpan = nowTime - firstPressTime;
       console.log("click: ", nowTime - firstPressTime);
-      if (timeSpan < 300) {
+
+      clearTimeoutArray(firstTimeToZeroTimeoutIdArray);
+
+      if (timeSpan < Efficient_Click_Time_Span) {
         runCardEffect();
       }
+      
       setFirstPressTime((x) => {
         return 0;
       })
     }
+  }
+
+  function clearTimeoutArray(timeoutIdArray) {
+    timeoutIdArray.forEach(id => {
+      clearTimeout(id);
+    });
+    setFirstTimeToZeroTimeoutIdArray(() => {
+      return [];
+    });
   }
 
   return (
