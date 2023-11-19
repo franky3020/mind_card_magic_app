@@ -28,7 +28,7 @@ function App() {
   const width = window.outerWidth;
   const height = window.outerHeight;
 
-  const cardHeight = Math.floor(height * 0.37); // 根據裝置高, 設定卡片高度
+  const cardHeight = Math.floor(height * 0.41); // 根據裝置高, 設定卡片高度
   const cardWidth = Math.floor(cardHeight / 1.375);
 
   console.log("width, height", width, height);
