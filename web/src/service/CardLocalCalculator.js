@@ -1,6 +1,6 @@
 
 
-const cardXMarginScale = 0.4;
+const cardXMarginScale = 0.3;
 const cardYMarginScale = 0.15;
 
 export class CardLocalCalculator {

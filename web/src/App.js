@@ -24,14 +24,14 @@ import MagicManage from "./service/MagicManage";
 const FreezeCardTimeSpan = 5000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
 function App() {
 
-  const cardWidth = 120;
-  const cardHeight = Math.floor(cardWidth * 1.375);
-  
+
   const width = window.outerWidth;
   const height = window.outerHeight;
 
-  console.log("width, height", width, height);
+  const cardHeight = Math.floor(height * 0.37); // 根據裝置高, 設定卡片高度
+  const cardWidth = Math.floor(cardHeight / 1.375);
 
+  console.log("width, height", width, height);
   
 
   const cardLocalCalculator = new CardLocalCalculator(width, height, cardWidth, cardHeight);
