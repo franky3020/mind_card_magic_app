@@ -3,14 +3,33 @@ import { useState } from "react";
 
 import flod_card from "../assets/cards/flod_card.jpg";
 
-export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {}, hideCard = false}) {
+export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {}, nextClickToHideCard = false}) {
 
   const [showCardSrc, setShowCardSrc] = useState(cardImg);
   const [firstPressTime, setFirstPressTime] = useState(0);
 
-  const cardStyle = hideCard ? {"display": "none"} : {};
+  // const cardStyle = hideCard ? {"display": "none"} : {};
+
+  const [cardStyle, setCardStyle] = useState({});
 
   function openOrFoldCard(e) {
+
+    if (nextClickToHideCard) {
+
+      setCardStyle((preStyle) => {
+
+        let newStytle = preStyle;
+        if (nextClickToHideCard) {
+          newStytle["display"] = "none";
+        }
+        
+        return newStytle;
+      });
+      onCardChange("open");
+
+      return;
+    }
+
     if (showCardSrc !== cardImg) {
       setShowCardSrc(cardImg);
       onCardChange("open");
@@ -21,7 +40,24 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
   }
 
   function onDragStart(e, data) {
+
+    setCardStyle((preStyle) => {
+      let newStytle = preStyle;
+      newStytle["zIndex"] = 9;
+      return newStytle;
+    });
+
     changeCard();
+    
+  }
+
+  function onDragStop() {
+    setCardStyle((preStyle) => {
+      let newStytle = preStyle;
+      newStytle["zIndex"] = 0;
+      console.log("franky-test newStytle:", newStytle);
+      return newStytle;
+    });
   }
   
   function changeCard() {
@@ -57,6 +93,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
       }}
       bounds={"parent"}
       onDragStart={onDragStart}
+      onDragStop={onDragStop}
       enableResizing={false}
       style={cardStyle}
     >
