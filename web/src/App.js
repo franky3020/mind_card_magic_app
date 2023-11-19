@@ -21,7 +21,7 @@ import cjCard from "./assets/cards/cj_compressed.jpg";
 import {useState} from "react";
 import MagicManage from "./service/MagicManage";
 
-const FreezeCardTimeSpan = 5000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
+const FreezeCardTimeSpan = 0; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
 function App() {
 
 
@@ -60,6 +60,7 @@ function App() {
   const [sixCardIsHide, setSixCardIsHide] = useState(false);
 
   const [allCardFreeze, setAllCardFreeze] = useState(false);
+  const [onlyCanFoldCard, setOnlyCanFoldCard] = useState(true);
 
   // 左上到右上 123, 左下到右下 456
   function afterCardEffectRun(cardStatue, cardNumber) {
@@ -79,7 +80,7 @@ function App() {
   
 
     if (cardStatue === "fold") {
-      magicManage.addHideCard();
+      magicManage.addHideCard(cardNumber);
     } else if (cardStatue === "open") {
       magicManage.subHideCard();
     }
@@ -90,10 +91,12 @@ function App() {
     if (magicManage.countHideCard === 6) {
 
       freezeAllCard();
+      setOnlyCanFoldCard(false);
       setTimeout(() => {
         magicManage.openHideCardMode();
         letAllCardToHideMode();
         unfreezeAllCard();
+        console.log("unfreezeAllCard");
       }, FreezeCardTimeSpan);
 
     }
@@ -132,28 +135,39 @@ function App() {
                  cardWidth={cardWidth} cardImg={oneCardSrc} 
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 1)}}
                  nextClickToHideCard={oneCardIsHide} 
-                 freezeCard={allCardFreeze} />
+                 freezeCard={allCardFreeze}
+                 onlyCanFoldCard={onlyCanFoldCard}/>
+      
       <PokerCard cardLocation={{x: topMidCardX, y: topLineY}} cardWidth={cardWidth} cardImg={twoCardSrc}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 2)}}
                  nextClickToHideCard={twoCardIsHide}
-                 freezeCard={allCardFreeze} />
+                 freezeCard={allCardFreeze}
+                 onlyCanFoldCard={onlyCanFoldCard}/>
+      
       <PokerCard cardLocation={{x: topRightCardX, y: topLineY}} cardWidth={cardWidth} cardImg={threeCardSrc}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 3)}}
                  nextClickToHideCard={threeCardIsHide} 
-                 freezeCard={allCardFreeze} />
+                 freezeCard={allCardFreeze}
+                 onlyCanFoldCard={onlyCanFoldCard}/>
 
+      
       <PokerCard cardLocation={{x: topLeftCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fourCardSrc}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 4)}}
                  nextClickToHideCard={fourCardIsHide}
-                 freezeCard={allCardFreeze} />
+                 freezeCard={allCardFreeze}
+                 onlyCanFoldCard={onlyCanFoldCard}/>
+      
       <PokerCard cardLocation={{x: topMidCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fiveCardSrc}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 5)}}
                  nextClickToHideCard={fiveCardIsHide}
-                 freezeCard={allCardFreeze} />
+                 freezeCard={allCardFreeze}
+                 onlyCanFoldCard={onlyCanFoldCard}/>
+      
       <PokerCard cardLocation={{x: topRightCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={sixCardSrc}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 6)}}
                  nextClickToHideCard={sixCardIsHide}
-                 freezeCard={allCardFreeze} />
+                 freezeCard={allCardFreeze}
+                 onlyCanFoldCard={onlyCanFoldCard}/>
     </div>
   );
 }

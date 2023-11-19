@@ -9,3 +9,13 @@
   right: 0;
   position: relative;
 }
+
+@keyframes displayCard{
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+    display: none;
+  }
+}

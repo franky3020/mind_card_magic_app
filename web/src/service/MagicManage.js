@@ -5,9 +5,15 @@ class _MagicManage {
     this.countHideCard = 0;
     this.isHideCardMode = false;
     this.tableCardMaxZindex = 0;
+    this.cardNumberArray = [];
   }
-  addHideCard() {
-    this.countHideCard++;
+  addHideCard(cardNumber) {
+    
+    if (this.cardNumberArray.includes(cardNumber) === false) {
+      this.cardNumberArray.push(cardNumber);
+      this.countHideCard++;
+    }
+    
   }
 
   subHideCard() {

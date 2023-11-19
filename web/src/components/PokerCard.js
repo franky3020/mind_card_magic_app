@@ -1,16 +1,19 @@
 import { Rnd } from "react-rnd";
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 
 import flod_card from "../assets/cards/flod_card.jpg";
 import MagicManage from "../service/MagicManage";
 
 const Efficient_Click_Time_Span = 400;
-export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {}, nextClickToHideCard = false, freezeCard = false}) {
+
+export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {},
+                            nextClickToHideCard = false, freezeCard = false,
+                          onlyCanFoldCard = true}) {
 
 
   const magicManage = MagicManage;
-
   const [showCardSrc, setShowCardSrc] = useState(cardImg);
+  
   const [firstPressTime, setFirstPressTime] = useState(0);
 
   const [cardStyle, setCardStyle] = useState({});
@@ -27,13 +30,16 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
 
       setCardStyle((preStyle) => {
 
-        let newStytle = preStyle;
+        let newStyle = preStyle;
         if (nextClickToHideCard) {
-          newStytle["display"] = "none";
+          newStyle["animationName"] = "displayCard";
+          newStyle["animationDuration"] = "2s";
+          newStyle["animationFillMode"] = "forwards";
+          
         }
-        
-        return newStytle;
+        return newStyle;
       });
+
       onCardChange("hide"); // 移除卡片
 
       return;
@@ -57,9 +63,13 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
         "zIndex": magicManage.tableCardMaxZindex
       };
     });
-
-    changeCard();
     
+    if (onlyCanFoldCard) {
+      setShowCardSrc(flod_card);
+      onCardChange("fold");
+    } else {
+      changeCard();
+    }
   }
 
   function onDragStop() {
@@ -81,8 +91,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
           clearTimeoutArray(firstTimeToZeroTimeoutIdArray);
         }, Efficient_Click_Time_Span);
 
-        const result = [...firstTimeToZeroTimeoutIdArray, timeoutId];
-        return result;
+        return [...firstTimeToZeroTimeoutIdArray, timeoutId];
       })
       
     } else {
