@@ -21,19 +21,28 @@ import cjCard from "./assets/cards/cj_compressed.jpg";
 import {useState} from "react";
 import MagicManage from "./service/MagicManage";
 
-
+const FreezeCardTimeSpan = 5000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
 function App() {
 
-  let cardWidth = 120;
+  const cardWidth = 120;
+  const cardHeight = Math.floor(cardWidth * 1.375);
   
-  // TODO: 還需偵測螢幕大小
-  const cardLocalCalculator = new CardLocalCalculator(851, 393, cardWidth, 112);
+  const width = window.outerWidth;
+  const height = window.outerHeight;
+
+  console.log("width, height", width, height);
+
+  
+
+  const cardLocalCalculator = new CardLocalCalculator(width, height, cardWidth, cardHeight);
   const topLeftCardX = cardLocalCalculator.getLeftX();
   const topMidCardX = cardLocalCalculator.getMidX();
   const topRightCardX = cardLocalCalculator.getRightX();
 
-  let topLineY = 20;
-  let bottomLineY = 200;
+  const topLineY = cardLocalCalculator.getTopY();
+  const bottomLineY = cardLocalCalculator.getBottomY();
+
+  console.log("topLineY, bottomLineY", topLineY, bottomLineY);
 
   const [oneCardSrc, setOneCardSrc] = useState(ckCard); // 對應 skCard
   const [twoCardSrc, setTwoCardSrc] = useState(hkCard); // 對應 dkCard
@@ -49,6 +58,8 @@ function App() {
   const [fourCardIsHide, setFourCardIsHide] = useState(false);
   const [fiveCardIsHide, setFiveCardIsHide] = useState(false);
   const [sixCardIsHide, setSixCardIsHide] = useState(false);
+
+  const [allCardFreeze, setAllCardFreeze] = useState(false);
 
   // 左上到右上 123, 左下到右下 456
   function afterCardEffectRun(cardStatue, cardNumber) {
@@ -77,39 +88,24 @@ function App() {
     console.log(magicManage.countHideCard);
     
     if (magicManage.countHideCard === 6) {
-      magicManage.openHideCardMode();
-      hideCardById(1);
-      hideCardById(2);
-      hideCardById(3);
-      hideCardById(4);
-      hideCardById(5);
-      hideCardById(6);
+
+      freezeAllCard();
+      setTimeout(() => {
+        magicManage.openHideCardMode();
+        letAllCardToHideMode();
+        unfreezeAllCard();
+      }, FreezeCardTimeSpan);
+
     }
   }
 
-  function hideCardById(cardNumber) {
-    switch (cardNumber) {
-      case 1:
-        setOneCardIsHide(() => true);
-        break;
-      case 2:
-        setTwoCardIsHide(() => true);
-        break;
-      case 3:
-        setThreeCardIsHide(() => true);
-        break;
-      case 4:
-        setFourCardIsHide(() => true);
-        break;
-      case 5:
-        setFiveCardIsHide(() => true);
-        break;
-      case 6:
-        setSixCardIsHide(() => true);
-        break;
-      default:
-        break;
-    }
+  function letAllCardToHideMode() {
+    setOneCardIsHide(() => true);
+    setTwoCardIsHide(() => true);
+    setThreeCardIsHide(() => true);
+    setFourCardIsHide(() => true);
+    setFiveCardIsHide(() => true);
+    setSixCardIsHide(() => true);
   }
 
   function offHideCardMode() {
@@ -121,28 +117,43 @@ function App() {
     setSixCardIsHide(() => false);
   }
 
+  function freezeAllCard() {
+    setAllCardFreeze(true);
+  }
+
+  function unfreezeAllCard() {
+    setAllCardFreeze(false);
+  }
+  
+
   return (
     <div className="App">
       <PokerCard cardLocation={{x: topLeftCardX, y: topLineY}}
                  cardWidth={cardWidth} cardImg={oneCardSrc} 
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 1)}}
-                 nextClickToHideCard={oneCardIsHide} />
+                 nextClickToHideCard={oneCardIsHide} 
+                 freezeCard={allCardFreeze} />
       <PokerCard cardLocation={{x: topMidCardX, y: topLineY}} cardWidth={cardWidth} cardImg={twoCardSrc}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 2)}}
-                 nextClickToHideCard={twoCardIsHide} />
+                 nextClickToHideCard={twoCardIsHide}
+                 freezeCard={allCardFreeze} />
       <PokerCard cardLocation={{x: topRightCardX, y: topLineY}} cardWidth={cardWidth} cardImg={threeCardSrc}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 3)}}
-                 nextClickToHideCard={threeCardIsHide}/>
+                 nextClickToHideCard={threeCardIsHide} 
+                 freezeCard={allCardFreeze} />
 
       <PokerCard cardLocation={{x: topLeftCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fourCardSrc}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 4)}}
-                 nextClickToHideCard={fourCardIsHide}/>
+                 nextClickToHideCard={fourCardIsHide}
+                 freezeCard={allCardFreeze} />
       <PokerCard cardLocation={{x: topMidCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fiveCardSrc}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 5)}}
-                 nextClickToHideCard={fiveCardIsHide}/>
+                 nextClickToHideCard={fiveCardIsHide}
+                 freezeCard={allCardFreeze} />
       <PokerCard cardLocation={{x: topRightCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={sixCardSrc}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 6)}}
-                 nextClickToHideCard={sixCardIsHide}/>
+                 nextClickToHideCard={sixCardIsHide}
+                 freezeCard={allCardFreeze} />
     </div>
   );
 }

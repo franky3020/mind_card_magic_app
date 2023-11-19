@@ -1,6 +1,7 @@
 
 
 const cardXMarginScale = 0.4;
+const cardYMarginScale = 0.15;
 
 export class CardLocalCalculator {
   
@@ -32,7 +33,22 @@ export class CardLocalCalculator {
   getRightX() {
     return this.getMidX() + this.cardW + this.getCardXMargin();
   }
-  
+
+  getCardYMargin() {
+    return this.cardH * cardYMarginScale;
+  }
+
+  getTopY() {
+    const yBlockH = this.cardH + this.getCardYMargin() + this.cardH ;
+    const midOfYBlockH = yBlockH / 2;
+
+    const midOfTableH = this.tableH / 2;
+    return midOfTableH - midOfYBlockH;
+  }
+
+  getBottomY() {
+    return this.getTopY() + this.cardH + this.getCardYMargin();
+  }
   
   
   

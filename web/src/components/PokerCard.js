@@ -5,7 +5,7 @@ import flod_card from "../assets/cards/flod_card.jpg";
 import MagicManage from "../service/MagicManage";
 
 const Efficient_Click_Time_Span = 400;
-export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {}, nextClickToHideCard = false}) {
+export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {}, nextClickToHideCard = false, freezeCard = false}) {
 
 
   const magicManage = MagicManage;
@@ -18,6 +18,10 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
   const [firstTimeToZeroTimeoutIdArray, setFirstTimeToZeroTimeoutIdArray] = useState([]);
 
   function runCardEffect(e) {
+
+    if (freezeCard) {
+      return;
+    }
 
     if (nextClickToHideCard) {
 
