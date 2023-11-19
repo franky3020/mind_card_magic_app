@@ -51,12 +51,10 @@ function App() {
   const [sixCardIsHide, setSixCardIsHide] = useState(false);
 
   // 左上到右上 123, 左下到右下 456
-  function controlLetCardChange(cardStatue, cardNumber) {
-    console.log("controlLetCardChange run");
+  function afterCardEffectRun(cardStatue, cardNumber) {
     let magicManage = MagicManage;
 
     if (magicManage.isHideCardMode) {
-      magicManage.subHideCard();
       magicManage.closeHideCardMode();
       offHideCardMode();
       // 換掉其它所有卡片
@@ -66,19 +64,17 @@ function App() {
       setFourCardSrc(hqCard);
       setFiveCardSrc(cjCard);
       setSixCardSrc(hjCard);
-      
     }
   
 
     if (cardStatue === "fold") {
       magicManage.addHideCard();
-    } else {
+    } else if (cardStatue === "open") {
       magicManage.subHideCard();
     }
 
     console.log("after magicManage.count");
     console.log(magicManage.countHideCard);
-    
     
     if (magicManage.countHideCard === 6) {
       magicManage.openHideCardMode();
@@ -129,23 +125,23 @@ function App() {
     <div className="App">
       <PokerCard cardLocation={{x: topLeftCardX, y: topLineY}}
                  cardWidth={cardWidth} cardImg={oneCardSrc} 
-                 onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 1)}}
+                 onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 1)}}
                  nextClickToHideCard={oneCardIsHide} />
       <PokerCard cardLocation={{x: topMidCardX, y: topLineY}} cardWidth={cardWidth} cardImg={twoCardSrc}
-                 onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 2)}}
+                 onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 2)}}
                  nextClickToHideCard={twoCardIsHide} />
       <PokerCard cardLocation={{x: topRightCardX, y: topLineY}} cardWidth={cardWidth} cardImg={threeCardSrc}
-                 onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 3)}}
+                 onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 3)}}
                  nextClickToHideCard={threeCardIsHide}/>
 
       <PokerCard cardLocation={{x: topLeftCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fourCardSrc}
-                 onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 4)}}
+                 onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 4)}}
                  nextClickToHideCard={fourCardIsHide}/>
       <PokerCard cardLocation={{x: topMidCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fiveCardSrc}
-                 onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 5)}}
+                 onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 5)}}
                  nextClickToHideCard={fiveCardIsHide}/>
       <PokerCard cardLocation={{x: topRightCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={sixCardSrc}
-                 onCardChange={(cardStatue) => {controlLetCardChange(cardStatue, 6)}}
+                 onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 6)}}
                  nextClickToHideCard={sixCardIsHide}/>
     </div>
   );

@@ -15,6 +15,7 @@ class _MagicManage {
 
   openHideCardMode() {
     this.isHideCardMode = true;
+    this.subHideCard();
   }
 
   closeHideCardMode() {

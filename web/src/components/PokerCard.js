@@ -8,11 +8,9 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
   const [showCardSrc, setShowCardSrc] = useState(cardImg);
   const [firstPressTime, setFirstPressTime] = useState(0);
 
-  // const cardStyle = hideCard ? {"display": "none"} : {};
-
   const [cardStyle, setCardStyle] = useState({});
 
-  function openOrFoldCard(e) {
+  function runCardEffect(e) {
 
     if (nextClickToHideCard) {
 
@@ -25,7 +23,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
         
         return newStytle;
       });
-      onCardChange("open");
+      onCardChange("hide"); // 移除卡片
 
       return;
     }
@@ -77,7 +75,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
       let timeSpan = nowTime - firstPressTime;
       console.log("click: ", nowTime - firstPressTime);
       if (timeSpan < 300) {
-        openOrFoldCard();
+        runCardEffect();
       }
       setFirstPressTime((x) => {
         return 0;
