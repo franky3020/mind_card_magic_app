@@ -2,31 +2,24 @@
 class _MagicManage {
   
   constructor() {
-    this.countHideCard = 0;
-    this.isHideCardMode = false;
     this.tableCardMaxZindex = 0;
     this.cardNumberArray = [];
   }
   addHideCard(cardNumber) {
-    
     if (this.cardNumberArray.includes(cardNumber) === false) {
       this.cardNumberArray.push(cardNumber);
-      this.countHideCard++;
     }
-    
   }
 
-  subHideCard() {
-    this.countHideCard--;
+  subHideCard(cardNumber) {
+    if (this.cardNumberArray.includes(cardNumber)) {
+      let indexRemove = this.cardNumberArray.indexOf(cardNumber);
+      this.cardNumberArray = this.cardNumberArray.slice(indexRemove, 1);
+    }
   }
-
-  openHideCardMode() {
-    this.isHideCardMode = true;
-    this.subHideCard();
-  }
-
-  closeHideCardMode() {
-    this.isHideCardMode = false;
+  
+  isAllCardFold() {
+    return this.cardNumberArray.length === 6;
   }
 
   addTableCardMaxZindex() {

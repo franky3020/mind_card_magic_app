@@ -20,7 +20,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
 
   const [firstTimeToZeroTimeoutIdArray, setFirstTimeToZeroTimeoutIdArray] = useState([]);
 
-  function runCardEffect(e) {
+  function afterDoubleClickCard(e) {
 
     if (freezeCard) {
       return;
@@ -48,9 +48,6 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
     if (showCardSrc !== cardImg) {
       setShowCardSrc(cardImg);
       onCardChange("open");
-    } else {
-      setShowCardSrc(flod_card);
-      onCardChange("fold");
     }
   }
 
@@ -68,14 +65,14 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
       setShowCardSrc(flod_card);
       onCardChange("fold");
     } else {
-      changeCard();
+      changeCardWhenDoubleClick();
     }
   }
 
   function onDragStop() {
   }
   
-  function changeCard() {
+  function changeCardWhenDoubleClick() {
     // 測試快速按兩下 才會變換卡片
     
     if (firstPressTime === 0) {
@@ -102,7 +99,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
       clearTimeoutArray(firstTimeToZeroTimeoutIdArray);
 
       if (timeSpan < Efficient_Click_Time_Span) {
-        runCardEffect();
+        afterDoubleClickCard();
       }
       
       setFirstPressTime((x) => {

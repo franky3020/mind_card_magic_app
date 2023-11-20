@@ -66,34 +66,28 @@ function App() {
   function afterCardEffectRun(cardStatue, cardNumber) {
     const magicManage = MagicManage;
 
-    if (magicManage.isHideCardMode) {
-      magicManage.closeHideCardMode();
+    if (cardStatue === "fold") {
+      magicManage.addHideCard(cardNumber);
+    } else if (cardStatue === "open") {
+      magicManage.subHideCard(cardNumber);
+    } else if (cardStatue === "hide") {
+      magicManage.subHideCard(cardNumber);
       offHideCardMode();
-      // 換掉其它所有卡片
+    }
+
+    if (magicManage.isAllCardFold()) {
+
+      freezeAllCard();
+      setOnlyCanFoldCard(false);
+
       setOneCardSrc(skCard);
       setTwoCardSrc(dkCard);
       setThreeCardSrc(cqCard);
       setFourCardSrc(hqCard);
       setFiveCardSrc(cjCard);
       setSixCardSrc(hjCard);
-    }
-  
-
-    if (cardStatue === "fold") {
-      magicManage.addHideCard(cardNumber);
-    } else if (cardStatue === "open") {
-      magicManage.subHideCard();
-    }
-
-    console.log("after magicManage.count");
-    console.log(magicManage.countHideCard);
-    
-    if (magicManage.countHideCard === 6) {
-
-      freezeAllCard();
-      setOnlyCanFoldCard(false);
+      
       setTimeout(() => {
-        magicManage.openHideCardMode();
         letAllCardToHideMode();
         unfreezeAllCard();
         console.log("unfreezeAllCard");
