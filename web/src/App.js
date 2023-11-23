@@ -1,10 +1,13 @@
 import "./App.css";
+import {Link} from "react-router-dom";
 
 export default function App() {
 
   return (
     <div className="App">
-      <p style={{color: "white"}}>Hellow App</p>
+      <Link to="/magicPage">
+        <button>Start</button>
+      </Link>
     </div>
   );
 }

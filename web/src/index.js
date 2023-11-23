@@ -10,8 +10,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <HashRouter>
     <Routes>
-      <Route path="/franky" element={ <App /> } />
-      <Route path="/" element={ <MindMagicPage /> } />
+      <Route path="/" element={ <App /> } />
+      <Route path="/magicPage" element={ <MindMagicPage /> } />
     </Routes>
   </HashRouter>
 );
