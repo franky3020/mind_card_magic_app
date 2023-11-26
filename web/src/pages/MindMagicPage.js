@@ -47,13 +47,13 @@ export function MindMagicPage() {
 
   console.log("topLineY, bottomLineY", topLineY, bottomLineY);
 
-  const [oneCardSrc, setOneCardSrc] = useState(ckCardInfo.img); // 對應 skCard
-  const [twoCardSrc, setTwoCardSrc] = useState(hkCardInfo.img); // 對應 dkCard
-  const [threeCardSrc, setThreeCardSrc] = useState(sqCardInfo.img);  // 對應 cqCard
+  const [oneCardSrc, setOneCardSrc] = useState(ckCardInfo); // 對應 skCard
+  const [twoCardSrc, setTwoCardSrc] = useState(hkCardInfo); // 對應 dkCard
+  const [threeCardSrc, setThreeCardSrc] = useState(sqCardInfo);  // 對應 cqCard
 
-  const [fourCardSrc, setFourCardSrc] = useState(dqCardInfo.img);  // 對應 hqCard
-  const [fiveCardSrc, setFiveCardSrc] = useState(sjCardInfo.img); // 對應 cjCard
-  const [sixCardSrc, setSixCardSrc] = useState(djCardInfo.img); // 對應 hjCard
+  const [fourCardSrc, setFourCardSrc] = useState(dqCardInfo);  // 對應 hqCard
+  const [fiveCardSrc, setFiveCardSrc] = useState(sjCardInfo); // 對應 cjCard
+  const [sixCardSrc, setSixCardSrc] = useState(djCardInfo); // 對應 hjCard
 
   const [oneCardIsHide, setOneCardIsHide] = useState(false);
   const [twoCardIsHide, setTwoCardIsHide] = useState(false);
@@ -83,12 +83,12 @@ export function MindMagicPage() {
       freezeAllCard();
       setOnlyCanFoldCard(false);
 
-      setOneCardSrc(skCardInfo.img);
-      setTwoCardSrc(dkCardInfo.img);
-      setThreeCardSrc(cqCardInfo.img);
-      setFourCardSrc(hqCardInfo.img);
-      setFiveCardSrc(cjCardInfo.img);
-      setSixCardSrc(hjCardInfo.img);
+      setOneCardSrc(skCardInfo);
+      setTwoCardSrc(dkCardInfo);
+      setThreeCardSrc(cqCardInfo);
+      setFourCardSrc(hqCardInfo);
+      setFiveCardSrc(cjCardInfo);
+      setSixCardSrc(hjCardInfo);
 
       setTimeout(() => {
         letAllCardToHideMode();
@@ -129,42 +129,48 @@ export function MindMagicPage() {
   return (
     <div className="App">
       <PokerCard cardLocation={{x: topLeftCardX, y: topLineY}}
-                 cardWidth={cardWidth} cardImg={oneCardSrc}
+                 cardWidth={cardWidth} cardImg={oneCardSrc.img}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 1)}}
                  nextClickToHideCard={oneCardIsHide}
                  freezeCard={allCardFreeze}
-                 onlyCanFoldCard={onlyCanFoldCard}/>
+                 onlyCanFoldCard={onlyCanFoldCard}
+                 cardId={oneCardSrc.cardId}/>
 
-      <PokerCard cardLocation={{x: topMidCardX, y: topLineY}} cardWidth={cardWidth} cardImg={twoCardSrc}
+      <PokerCard cardLocation={{x: topMidCardX, y: topLineY}} cardWidth={cardWidth} cardImg={twoCardSrc.img}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 2)}}
                  nextClickToHideCard={twoCardIsHide}
                  freezeCard={allCardFreeze}
-                 onlyCanFoldCard={onlyCanFoldCard}/>
+                 onlyCanFoldCard={onlyCanFoldCard}
+                 cardId={twoCardSrc.cardId}/>
 
-      <PokerCard cardLocation={{x: topRightCardX, y: topLineY}} cardWidth={cardWidth} cardImg={threeCardSrc}
+      <PokerCard cardLocation={{x: topRightCardX, y: topLineY}} cardWidth={cardWidth} cardImg={threeCardSrc.img}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 3)}}
                  nextClickToHideCard={threeCardIsHide}
                  freezeCard={allCardFreeze}
-                 onlyCanFoldCard={onlyCanFoldCard}/>
+                 onlyCanFoldCard={onlyCanFoldCard}
+                 cardId={threeCardSrc.cardId}/>
 
 
-      <PokerCard cardLocation={{x: topLeftCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fourCardSrc}
+      <PokerCard cardLocation={{x: topLeftCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fourCardSrc.img}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 4)}}
                  nextClickToHideCard={fourCardIsHide}
                  freezeCard={allCardFreeze}
-                 onlyCanFoldCard={onlyCanFoldCard}/>
+                 onlyCanFoldCard={onlyCanFoldCard}
+                 cardId={fourCardSrc.cardId}/>
 
-      <PokerCard cardLocation={{x: topMidCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fiveCardSrc}
+      <PokerCard cardLocation={{x: topMidCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={fiveCardSrc.img}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 5)}}
                  nextClickToHideCard={fiveCardIsHide}
                  freezeCard={allCardFreeze}
-                 onlyCanFoldCard={onlyCanFoldCard}/>
+                 onlyCanFoldCard={onlyCanFoldCard}
+                 cardId={fiveCardSrc.cardId}/>
 
-      <PokerCard cardLocation={{x: topRightCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={sixCardSrc}
+      <PokerCard cardLocation={{x: topRightCardX, y: bottomLineY}} cardWidth={cardWidth} cardImg={sixCardSrc.img}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 6)}}
                  nextClickToHideCard={sixCardIsHide}
                  freezeCard={allCardFreeze}
-                 onlyCanFoldCard={onlyCanFoldCard}/>
+                 onlyCanFoldCard={onlyCanFoldCard}
+                 cardId={sixCardSrc.cardId}/>
     </div>
   );
   

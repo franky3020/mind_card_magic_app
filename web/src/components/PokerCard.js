@@ -18,7 +18,6 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
 
   const clipPathSetting = getPokerCardClipPath(cardId);
   const [cardStyle, setCardStyle] = useState({"clip-path": clipPathSetting});
-  // const [cardStyle, setCardStyle] = useState({});
 
 
   const [firstTimeToZeroTimeoutIdArray, setFirstTimeToZeroTimeoutIdArray] = useState([]);
@@ -68,10 +67,21 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
     
     if (onlyCanFoldCard) {
       setShowCardSrc(flod_card);
+      setFoldCardStyle();
+
       onCardChange("fold");
     } else {
       changeCardWhenDoubleClick();
     }
+  }
+
+  function setFoldCardStyle() {
+    const clipPathSetting = getPokerCardClipPath("foldCard");
+    setCardStyle((preStyle) => {
+      let newStyle = preStyle;
+      newStyle["clip-path"] = clipPathSetting;
+      return newStyle;
+    });
   }
 
   function onDragStop() {

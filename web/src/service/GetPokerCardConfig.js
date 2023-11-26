@@ -15,9 +15,32 @@ import cjCard from "../assets/cards/cj_compressed.jpg";
 
 export function getPokerCardClipPath(cradId) {
 
-    if (cradId === "null") {
-        return "inset(10px 6px round 10px)";
+    let result = "";
+    switch(cradId) {
+        
+        case "foldCard":
+            result = "inset(2% 2% 2% 2% round 5%)"
+            break;
+        case "ckCard":
+            result = "inset(4% 3.5% 4% 4% round 5%)"
+            break;
+        case "sjCard":
+            result = "inset(3% 2% 4% 2% round 5%)"
+            break;
+        case "djCard":
+            result = "inset(4% 2% 4% 2% round 5%)"
+            break; 
+        case "hjCard":
+            result = "inset(4% 3% 4% 4% round 5%)"
+            break;
+        case "cjCard":
+            result = "inset(4% 2% 4% 4% round 5%)"
+            break;     
+        default:
+            result = "inset(4% 3% 4% 4% round 5%)";
     }
+
+    return result
 }
 
 
