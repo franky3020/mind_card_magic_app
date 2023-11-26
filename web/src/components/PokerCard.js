@@ -1,14 +1,14 @@
 import { Rnd } from "react-rnd";
-import { useState, useEffect  } from "react";
-
+import { useState } from "react";
 import flod_card from "../assets/cards/flod_card.jpg";
 import MagicManage from "../service/MagicManage";
+import { getPokerCardClipPath } from "../service/GetPokerCardConfig";
 
 const Efficient_Click_Time_Span = 400;
 
 export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {},
                             nextClickToHideCard = false, freezeCard = false,
-                          onlyCanFoldCard = true}) {
+                          onlyCanFoldCard = true, cardId = "null"}) {
 
 
   const magicManage = MagicManage;
@@ -16,7 +16,10 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
   
   const [firstPressTime, setFirstPressTime] = useState(0);
 
-  const [cardStyle, setCardStyle] = useState({});
+  const clipPathSetting = getPokerCardClipPath(cardId);
+  const [cardStyle, setCardStyle] = useState({"clip-path": clipPathSetting});
+  // const [cardStyle, setCardStyle] = useState({});
+
 
   const [firstTimeToZeroTimeoutIdArray, setFirstTimeToZeroTimeoutIdArray] = useState([]);
 
@@ -53,12 +56,14 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
 
   function onDragStart(e, data) {
 
-    setCardStyle(() => {
+    setCardStyle((preStyle) => {
+      let newStyle = preStyle;
       magicManage.addTableCardMaxZindex();
-      return {
-        "display": cardStyle["display"],
-        "zIndex": magicManage.tableCardMaxZindex
-      };
+
+      newStyle["display"] = cardStyle["display"];
+      newStyle["zIndex"] = magicManage.tableCardMaxZindex;
+      
+      return newStyle;
     });
     
     if (onlyCanFoldCard) {

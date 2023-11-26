@@ -3,21 +3,20 @@ import "../App.css";
 import { PokerCard } from "../components/PokerCard";
 import {CardLocalCalculator} from "../service/CardLocalCalculator";
 
+import { skCardInfo } from "../service/GetPokerCardConfig";
+import { hkCardInfo } from "../service/GetPokerCardConfig";
+import { dkCardInfo } from "../service/GetPokerCardConfig";
+import { ckCardInfo } from "../service/GetPokerCardConfig";
 
-import skCard from "../assets/cards/sk_compressed.jpg";
-import hkCard from "../assets/cards/hk_compressed.jpg";
-import dkCard from "../assets/cards/dk_compressed.jpg";
-import ckCard from "../assets/cards/ck_compressed.jpg";
+import { sqCardInfo } from "../service/GetPokerCardConfig";
+import { hqCardInfo } from "../service/GetPokerCardConfig";
+import { dqCardInfo } from "../service/GetPokerCardConfig";
+import { cqCardInfo } from "../service/GetPokerCardConfig";
 
-import sqCard from "../assets/cards/sq_compressed.jpg";
-import hqCard from "../assets/cards/hq_compressed.jpg";
-import dqCard from "../assets/cards/dq_compressed.jpg";
-import cqCard from "../assets/cards/cq_compressed.jpg";
-
-import sjCard from "../assets/cards/sj_compressed.jpg";
-import hjCard from "../assets/cards/hj_compressed.jpg";
-import djCard from "../assets/cards/dj_compressed.jpg";
-import cjCard from "../assets/cards/cj_compressed.jpg";
+import { sjCardInfo } from "../service/GetPokerCardConfig";
+import { hjCardInfo } from "../service/GetPokerCardConfig";
+import { djCardInfo } from "../service/GetPokerCardConfig";
+import { cjCardInfo } from "../service/GetPokerCardConfig";
 
 import {useState} from "react";
 import MagicManage from "../service/MagicManage";
@@ -48,13 +47,13 @@ export function MindMagicPage() {
 
   console.log("topLineY, bottomLineY", topLineY, bottomLineY);
 
-  const [oneCardSrc, setOneCardSrc] = useState(ckCard); // 對應 skCard
-  const [twoCardSrc, setTwoCardSrc] = useState(hkCard); // 對應 dkCard
-  const [threeCardSrc, setThreeCardSrc] = useState(sqCard);  // 對應 cqCard
+  const [oneCardSrc, setOneCardSrc] = useState(ckCardInfo.img); // 對應 skCard
+  const [twoCardSrc, setTwoCardSrc] = useState(hkCardInfo.img); // 對應 dkCard
+  const [threeCardSrc, setThreeCardSrc] = useState(sqCardInfo.img);  // 對應 cqCard
 
-  const [fourCardSrc, setFourCardSrc] = useState(dqCard);  // 對應 hqCard
-  const [fiveCardSrc, setFiveCardSrc] = useState(sjCard); // 對應 cjCard
-  const [sixCardSrc, setSixCardSrc] = useState(djCard); // 對應 hjCard
+  const [fourCardSrc, setFourCardSrc] = useState(dqCardInfo.img);  // 對應 hqCard
+  const [fiveCardSrc, setFiveCardSrc] = useState(sjCardInfo.img); // 對應 cjCard
+  const [sixCardSrc, setSixCardSrc] = useState(djCardInfo.img); // 對應 hjCard
 
   const [oneCardIsHide, setOneCardIsHide] = useState(false);
   const [twoCardIsHide, setTwoCardIsHide] = useState(false);
@@ -84,12 +83,12 @@ export function MindMagicPage() {
       freezeAllCard();
       setOnlyCanFoldCard(false);
 
-      setOneCardSrc(skCard);
-      setTwoCardSrc(dkCard);
-      setThreeCardSrc(cqCard);
-      setFourCardSrc(hqCard);
-      setFiveCardSrc(cjCard);
-      setSixCardSrc(hjCard);
+      setOneCardSrc(skCardInfo.img);
+      setTwoCardSrc(dkCardInfo.img);
+      setThreeCardSrc(cqCardInfo.img);
+      setFourCardSrc(hqCardInfo.img);
+      setFiveCardSrc(cjCardInfo.img);
+      setSixCardSrc(hjCardInfo.img);
 
       setTimeout(() => {
         letAllCardToHideMode();
