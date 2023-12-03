@@ -49,6 +49,13 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
 
     if (showCardSrc !== cardImg) {
       setShowCardSrc(cardImg);
+      const clipPathSetting = getPokerCardClipPath(cardId);
+      setCardStyle((preStyle) => {
+        let newStyle = preStyle;
+        newStyle["clip-path"] = clipPathSetting;
+        return newStyle;
+      });
+      
       onCardChange("open");
     }
   }

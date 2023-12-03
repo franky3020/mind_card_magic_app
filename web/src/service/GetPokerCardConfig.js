@@ -31,11 +31,23 @@ export function getPokerCardClipPath(cradId) {
             result = "inset(4% 2% 4% 2% round 5%)"
             break; 
         case "hjCard":
-            result = "inset(4% 3% 4% 4% round 5%)"
+            result = "inset(3% 2% 3% 3% round 5%)"
             break;
         case "cjCard":
-            result = "inset(4% 2% 4% 4% round 5%)"
-            break;     
+            result = "inset(3% 2% 3% 1% round 5%)"
+            break;    
+        case "skCard":
+            result = "inset(2% 2% 2% 2% round 5%)"
+            break;
+        case "dkCard":
+            result = "inset(2% 2% 3% 2% round 5%)"
+            break;        
+        case "cqCard":
+            result = "inset(2% 2% 3% 2% round 5%)"
+            break;
+        case "hqCard":
+            result = "inset(2% 2% 3% 2% round 5%)"
+            break;
         default:
             result = "inset(4% 3% 4% 4% round 5%)";
     }
