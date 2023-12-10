@@ -3,6 +3,7 @@ import { useState } from "react";
 import flod_card from "../assets/cards/flod_card.jpg";
 import MagicManage from "../service/MagicManage";
 import { getPokerCardClipPath } from "../service/GetPokerCardConfig";
+import { useRef } from 'react';
 
 const Efficient_Click_Time_Span = 400;
 
@@ -17,10 +18,15 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
   const [firstPressTime, setFirstPressTime] = useState(0);
 
   const clipPathSetting = getPokerCardClipPath(cardId);
-  const [cardStyle, setCardStyle] = useState({"clip-path": clipPathSetting});
+  const [cardStyle, setCardStyle] = useState({"clipPath": clipPathSetting});
 
 
   const [firstTimeToZeroTimeoutIdArray, setFirstTimeToZeroTimeoutIdArray] = useState([]);
+
+  const [cardPosition, setCardPosition] = useState({x: cardLocation.x, y: cardLocation.y});
+
+  const imgRef = useRef(null);
+
 
   function afterDoubleClickCard(e) {
 
@@ -52,7 +58,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
       const clipPathSetting = getPokerCardClipPath(cardId);
       setCardStyle((preStyle) => {
         let newStyle = preStyle;
-        newStyle["clip-path"] = clipPathSetting;
+        newStyle["clipPath"] = clipPathSetting;
         return newStyle;
       });
       
@@ -77,21 +83,40 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
       setFoldCardStyle();
 
       onCardChange("fold");
+      goDown();
     } else {
       changeCardWhenDoubleClick();
     }
+  }
+
+  function goDown() {
+    const cardH = imgRef.current.clientHeight;
+    setInterval(() => {
+      
+      setCardPosition((pred) => {
+        const x = pred.x;
+        const y = pred.y + 0.5;
+        if (y + cardH < 393) {
+          return {x, y};
+        } else {
+          return {x: pred.x, y: pred.y};
+        }
+      });
+    }, 20);
+    
   }
 
   function setFoldCardStyle() {
     const clipPathSetting = getPokerCardClipPath("foldCard");
     setCardStyle((preStyle) => {
       let newStyle = preStyle;
-      newStyle["clip-path"] = clipPathSetting;
+      newStyle["clipPath"] = clipPathSetting;
       return newStyle;
     });
   }
 
-  function onDragStop() {
+  function onDragStop(e, d) {
+    setCardPosition({x: d.x, y: d.y});
   }
   
   function changeCardWhenDoubleClick() {
@@ -141,9 +166,9 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
 
   return (
     <Rnd
-      default={{
-        x: cardLocation.x,
-        y: cardLocation.y,
+      position={{
+        x: cardPosition.x,
+        y: cardPosition.y,
       }}
       bounds={"parent"}
       onDragStart={onDragStart}
@@ -153,6 +178,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
     >
       <div>
         <img
+          ref={imgRef}
           src={showCardSrc}
           width={cardWidth}
           alt="card"

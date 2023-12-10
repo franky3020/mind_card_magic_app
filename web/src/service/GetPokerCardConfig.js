@@ -19,7 +19,7 @@ export function getPokerCardClipPath(cradId) {
     switch(cradId) {
         
         case "foldCard":
-            result = "inset(2% 2% 2% 2% round 5%)"
+            result = "inset(2% 2% 3% 2% round 5%)"
             break;
         case "ckCard":
             result = "inset(4% 3.5% 4% 4% round 5%)"

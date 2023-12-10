@@ -22,7 +22,7 @@ import {useState} from "react";
 import MagicManage from "../service/MagicManage";
 
 
-const FreezeCardTimeSpan = 0; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
+const FreezeCardTimeSpan = 3000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
 
 
 
