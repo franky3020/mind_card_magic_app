@@ -43,13 +43,9 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
   if (isSettedStopEvent.current === false) {
     console.log("franky-test: ");
     isSettedStopEvent.current = true;
-    window.emitter.on('stop', () => {
-      console.log("call stop , showCardSrc:", showCardSrc, ", cardMoveInterval: ", cardMoveInterval.current);
-      removeCardMove();
-      // if (isSendStopEvent === false) {
-      //   console.log("call stop , showCardSrc:", showCardSrc, ", cardMoveInterval: ", cardMoveInterval);
-      //   removeCardMove();
-      // }
+    window.emitter.on('stop', (stopCardId) => {
+      console.log("call stop cardId:", stopCardId);
+      removeCardMove(stopCardId);
     });
   }
 
@@ -95,6 +91,8 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
 
   function onDragStart(e, data) {
 
+    removeCardMove(cardId);
+
     setCardStyle((preStyle) => {
       let newStyle = preStyle;
       magicManage.addTableCardMaxZindex();
@@ -136,7 +134,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
           if (isSendStopEvent.current === false) {
             console.log("send stop");
             isSendStopEvent.current = true;
-            window.emitter.emit('stop');
+            window.emitter.emit('stop', cardId);
           }
 
           return {x: pred.x, y: pred.y};
@@ -149,7 +147,10 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
 
   }
 
-  function removeCardMove() {
+  function removeCardMove(stopCardId) {
+    if (stopCardId !== cardId) {
+      return;
+    }
     if (typeof cardMoveInterval.current !== "undefined") {
       clearInterval(cardMoveInterval.current);
       cardMoveInterval.current = undefined;
