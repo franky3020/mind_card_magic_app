@@ -1,20 +1,23 @@
 import { Rnd } from "react-rnd";
 import { useState } from "react";
+
 import flod_card from "../assets/cards/flod_card.jpg";
 import MagicManage from "../service/MagicManage";
 import { getPokerCardClipPath } from "../service/GetPokerCardConfig";
 import { useRef } from 'react';
+import { createNanoEvents } from 'nanoevents'
 
+window.emitter = createNanoEvents();
 const Efficient_Click_Time_Span = 400;
-
-export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () => {},
+// tableZoom={w, h}
+export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardChange = () => {},
                             nextClickToHideCard = false, freezeCard = false,
                           onlyCanFoldCard = true, cardId = "null"}) {
 
 
   const magicManage = MagicManage;
   const [showCardSrc, setShowCardSrc] = useState(cardImg);
-  
+
   const [firstPressTime, setFirstPressTime] = useState(0);
 
   const clipPathSetting = getPokerCardClipPath(cardId);
@@ -25,7 +28,32 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
 
   const [cardPosition, setCardPosition] = useState({x: cardLocation.x, y: cardLocation.y});
 
+  const cardMoveInterval = useRef(undefined);
+
+  const isStopAutoMove = useRef(false);
+  const isSendStopEvent = useRef(false);
+
   const imgRef = useRef(null);
+
+
+  window.emitter.on('goDown', () => {
+    goDown();
+    // console.log("in goDown, cardMoveInterval:", cardMoveInterval);
+  });
+
+  if (isStopAutoMove.current === false) {
+    console.log("franky-test: ");
+    isStopAutoMove.current = true;
+    window.emitter.on('stop', () => {
+      console.log("call stop , showCardSrc:", showCardSrc, ", cardMoveInterval: ", cardMoveInterval.current);
+      removeCardMove();
+      // if (isSendStopEvent === false) {
+      //   console.log("call stop , showCardSrc:", showCardSrc, ", cardMoveInterval: ", cardMoveInterval);
+      //   removeCardMove();
+      // }
+    });
+  }
+
 
 
   function afterDoubleClickCard(e) {
@@ -43,7 +71,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
           newStyle["animationName"] = "displayCard";
           newStyle["animationDuration"] = "2s";
           newStyle["animationFillMode"] = "forwards";
-          
+
         }
         return newStyle;
       });
@@ -61,7 +89,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
         newStyle["clipPath"] = clipPathSetting;
         return newStyle;
       });
-      
+
       onCardChange("open");
     }
   }
@@ -74,36 +102,60 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
 
       newStyle["display"] = cardStyle["display"];
       newStyle["zIndex"] = magicManage.tableCardMaxZindex;
-      
+
       return newStyle;
     });
-    
+
     if (onlyCanFoldCard) {
       setShowCardSrc(flod_card);
       setFoldCardStyle();
 
       onCardChange("fold");
-      goDown();
+
     } else {
       changeCardWhenDoubleClick();
     }
   }
 
   function goDown() {
+
+    if (typeof cardMoveInterval.current !== "undefined") {
+      return;
+    }
+
     const cardH = imgRef.current.clientHeight;
-    setInterval(() => {
-      
+
+
+    const cardMoveIntervalId = setInterval(() => {
+
       setCardPosition((pred) => {
         const x = pred.x;
         const y = pred.y + 0.5;
-        if (y + cardH < 393) {
+        if (y + cardH < tableZoom.h) {
           return {x, y};
         } else {
+          if (isSendStopEvent.current === false) {
+            console.log("send stop");
+            isSendStopEvent.current = true;
+            window.emitter.emit('stop');
+          }
+
           return {x: pred.x, y: pred.y};
         }
       });
+
     }, 20);
-    
+    console.log("goDown(), cardMoveIntervalId: ", cardMoveIntervalId);
+    cardMoveInterval.current = cardMoveIntervalId;
+
+  }
+
+  function removeCardMove() {
+    // console.log("in removeCardMove, cardMoveInterval:", cardMoveInterval);
+    if (typeof cardMoveInterval.current !== "undefined") {
+      clearInterval(cardMoveInterval.current);
+      cardMoveInterval.current = undefined;
+    }
   }
 
   function setFoldCardStyle() {
@@ -118,10 +170,10 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
   function onDragStop(e, d) {
     setCardPosition({x: d.x, y: d.y});
   }
-  
+
   function changeCardWhenDoubleClick() {
     // 測試快速按兩下 才會變換卡片
-    
+
     if (firstPressTime === 0) {
       setFirstPressTime((x) => {
         return new Date().getTime();
@@ -137,7 +189,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
 
         return [...firstTimeToZeroTimeoutIdArray, timeoutId];
       })
-      
+
     } else {
       let nowTime = new Date().getTime();
       let timeSpan = nowTime - firstPressTime;
@@ -148,7 +200,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, onCardChange = () =
       if (timeSpan < Efficient_Click_Time_Span) {
         afterDoubleClickCard();
       }
-      
+
       setFirstPressTime((x) => {
         return 0;
       })
