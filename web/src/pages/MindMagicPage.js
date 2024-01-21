@@ -137,7 +137,7 @@ export function MindMagicPage() {
                  onlyCanFoldCard={onlyCanFoldCard}
                  cardId={oneCardSrc.cardId}/>
 
-      <PokerCard cardLocation={{x: topMidCardX, y: topLineY}} 
+      <PokerCard cardLocation={{x: topMidCardX, y: topLineY}}
                  cardWidth={cardWidth} cardImg={twoCardSrc.img}
                  tableZoom={{w: width, h: height}}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 2)}}
@@ -146,7 +146,7 @@ export function MindMagicPage() {
                  onlyCanFoldCard={onlyCanFoldCard}
                  cardId={twoCardSrc.cardId}/>
 
-      <PokerCard cardLocation={{x: topRightCardX, y: topLineY}} 
+      <PokerCard cardLocation={{x: topRightCardX, y: topLineY}}
                  cardWidth={cardWidth} cardImg={threeCardSrc.img}
                  tableZoom={{w: width, h: height}}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 3)}}
@@ -165,7 +165,7 @@ export function MindMagicPage() {
                  onlyCanFoldCard={onlyCanFoldCard}
                  cardId={fourCardSrc.cardId}/>
 
-      <PokerCard cardLocation={{x: topMidCardX, y: bottomLineY}} 
+      <PokerCard cardLocation={{x: topMidCardX, y: bottomLineY}}
                  cardWidth={cardWidth} cardImg={fiveCardSrc.img}
                  tableZoom={{w: width, h: height}}
                  onCardChange={(cardStatue) => {afterCardEffectRun(cardStatue, 5)}}
@@ -184,5 +184,4 @@ export function MindMagicPage() {
                  cardId={sixCardSrc.cardId}/>
     </div>
   );
-  
 }

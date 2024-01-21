@@ -12,7 +12,7 @@ const Efficient_Click_Time_Span = 400;
 // tableZoom={w, h}
 export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardChange = () => {},
                             nextClickToHideCard = false, freezeCard = false,
-                          onlyCanFoldCard = true, cardId = "null"}) {
+                          onlyCanFoldCard = true, cardId = ""}) {
 
 
   const magicManage = MagicManage;
@@ -30,20 +30,19 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
 
   const cardMoveInterval = useRef(undefined);
 
-  const isStopAutoMove = useRef(false);
+  const isSettedStopEvent = useRef(false);
   const isSendStopEvent = useRef(false);
 
   const imgRef = useRef(null);
 
 
-  window.emitter.on('goDown', () => {
+  window.emitter.on('down', () => {
     goDown();
-    // console.log("in goDown, cardMoveInterval:", cardMoveInterval);
   });
 
-  if (isStopAutoMove.current === false) {
+  if (isSettedStopEvent.current === false) {
     console.log("franky-test: ");
-    isStopAutoMove.current = true;
+    isSettedStopEvent.current = true;
     window.emitter.on('stop', () => {
       console.log("call stop , showCardSrc:", showCardSrc, ", cardMoveInterval: ", cardMoveInterval.current);
       removeCardMove();
@@ -151,7 +150,6 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
   }
 
   function removeCardMove() {
-    // console.log("in removeCardMove, cardMoveInterval:", cardMoveInterval);
     if (typeof cardMoveInterval.current !== "undefined") {
       clearInterval(cardMoveInterval.current);
       cardMoveInterval.current = undefined;
