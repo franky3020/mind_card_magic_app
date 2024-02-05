@@ -7,6 +7,13 @@ import { getPokerCardClipPath } from "../service/GetPokerCardConfig";
 import { useRef } from 'react';
 import { createNanoEvents } from 'nanoevents'
 
+
+
+// 測試方法 emitter.emit('down')
+// 則卡片會移動
+
+
+
 window.emitter = createNanoEvents();
 const Efficient_Click_Time_Span = 400;
 // tableZoom={w, h}
@@ -126,6 +133,10 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
     const cardMoveIntervalId = setInterval(() => {
 
       setCardPosition((pred) => {
+
+        // TODO:要有一個計算卡片下一個位置的計算器
+        // 輸入上一個位置 與力量 與桌面範圍, 輸出下一個位置
+
         const x = pred.x;
         const y = pred.y + 0.5;
         if (y + cardH < tableZoom.h) {
