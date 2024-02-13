@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import {HashRouter, Route, Routes} from "react-router-dom";
 import {MindMagicPage} from "./pages/MindMagicPage";
 
+
+const renderReactDom = () => {
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <HashRouter>
@@ -20,3 +23,21 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+};
+
+
+
+if (window.cordova) {
+  document.addEventListener('deviceready', () => {
+    renderReactDom();
+  }, false);
+} else {
+  renderReactDom();
+}
+
+
+
+
+
+
