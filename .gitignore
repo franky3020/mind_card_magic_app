@@ -1,6 +1,7 @@
 
 my-app/.idea/
 
-cordova-app/www/
+cordova-app/www/*
+!cordova-app/www/.gitkeeper
 
 node_modules/
