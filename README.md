@@ -10,4 +10,6 @@ SDK=33.0.2
 * 還需要測試手機晃動檢測 讓晃動時可以觸發卡片移動
 * 需要加上版本檢查與強制更新機制
 
-
+## 重要筆記
+* react 需要在 web/package.json 加入 "homepage": "./", 才不會是白畫面
+* 在 web/index.js 需加上 等待 deviceready 才 renderReactDom
