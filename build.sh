@@ -5,6 +5,7 @@ npm run build
 
 cd ../cordova-app
 rm -rf www
+rm -rf platforms
 cp -r ../web/build ./www
 touch ./www/.gitkeeper
 npm i

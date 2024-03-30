@@ -15,6 +15,10 @@
 
     <!-- Platform Configs & Platform Overriding Configs -->
     <platform name="android"></platform>
-    <platform name="ios"></platform>
+    <platform name="ios">
+        <preference name="deployment-target" value="12.0" />
+        <preference name="scheme" value="app" />
+        <preference name="SuppressesLongPressGesture" value="true" />
+    </platform>
 
 </widget>
