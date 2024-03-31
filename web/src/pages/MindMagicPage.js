@@ -76,6 +76,13 @@ export function MindMagicPage() {
     } else if (cardStatue === "hide") {
       magicManage.subHideCard(cardNumber);
       offHideCardMode();
+
+      freezeAllCard();
+      console.log("After hide card so freezeAllCard a while");
+      setTimeout(() => {
+        unfreezeAllCard();
+        console.log("UnfreezeAllCard");
+      }, FreezeCardTimeSpan);
     }
 
     if (magicManage.isAllCardFold()) {
