@@ -1,6 +1,6 @@
 
 class _MagicManage {
-  
+
   constructor() {
     this.tableCardMaxZindex = 0;
     this.cardNumberArray = [];
@@ -17,7 +17,7 @@ class _MagicManage {
       this.cardNumberArray = this.cardNumberArray.slice(indexRemove, 1);
     }
   }
-  
+
   isAllCardFold() {
     return this.cardNumberArray.length === 6;
   }
