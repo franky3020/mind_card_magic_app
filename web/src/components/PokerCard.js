@@ -111,11 +111,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
     });
 
     if (onlyCanFoldCard) {
-      setShowCardSrc(flod_card);
-      setFoldCardStyle();
-
-      onCardChange("fold");
-
+      setCardToFold()
     } else {
       changeCardWhenDoubleClick();
     }
@@ -166,6 +162,12 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
       clearInterval(cardMoveInterval.current);
       cardMoveInterval.current = undefined;
     }
+  }
+
+  function setCardToFold() {
+    setShowCardSrc(flod_card);
+    setFoldCardStyle();
+    onCardChange("fold");
   }
 
   function setFoldCardStyle() {
