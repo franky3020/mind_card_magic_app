@@ -1,4 +1,5 @@
 cd web
+rm -rf ./node_modules
 npm i
 npm run build
 
@@ -8,6 +9,7 @@ rm -rf www
 rm -rf platforms
 cp -r ../web/build ./www
 touch ./www/.gitkeeper
+rm -rf ./node_modules
 npm i
 npx cordova prepare
 npx cordova platform rm android --nosave
