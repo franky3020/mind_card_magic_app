@@ -19,16 +19,19 @@ import { cjCardInfo } from "../service/GetPokerCardConfig";
 
 import { useState, useEffect } from "react";
 import MagicManage from "../service/MagicManage";
-import debounce from "debounce";
 
 const FreezeCardTimeSpan = 3000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
+
+// 把 加速度感應關閉 因為還正在開發中
+const devOpenDevicemotionFeature = false;
 
 export function MindMagicPage() {
   const width = window.outerWidth;
   const height = window.outerHeight;
 
+  // 如過調整以下比例 則 zoomOutCard class 的比例也要調整
   const cardHeight = Math.floor(height * 0.41); // 根據裝置高, 設定卡片高度
-  const cardWidth = Math.floor(cardHeight / 1.375);
+  const cardWidth = Math.floor(cardHeight / 1.375); // 等同 29.81% 的 高
 
   console.log("width, height", width, height);
 
@@ -65,37 +68,25 @@ export function MindMagicPage() {
   const [allCardFreeze, setAllCardFreeze] = useState(false);
   const [onlyCanFoldCard, setOnlyCanFoldCard] = useState(true);
 
-  const [deviceXYZ, setDeviceXYZ] = useState({ x: 0, y: 0, z: 0 });
-
-  const [isCanShowDeviceXYZ, setIsCanShowDeviceXYZ] = useState(true);
-  console.log(navigator);
-  console.log(navigator.accelerometer);
-
   useEffect(() => {
-    console.log("run useEffect: add devicemotion");
-    window.addEventListener("devicemotion", processEvent, true);
-    function processEvent(event) {
-      let accelerationX = event.acceleration.x;
-      let accelerationY = event.acceleration.y;
-      let accelerationZ = event.acceleration.z;
-
-      if (isCanShowDeviceXYZ) {
+    if (devOpenDevicemotionFeature) {
+      console.log("run useEffect: add devicemotion");
+      window.addEventListener("devicemotion", processEvent, true);
+      function processEvent(event) {
+        let accelerationX = event.acceleration.x;
+        let accelerationY = event.acceleration.y;
+        let accelerationZ = event.acceleration.z;
         console.log("run devicemotion:");
         console.log("x:", accelerationX);
         console.log("y:", accelerationY);
         console.log("z:", accelerationZ);
-        setDeviceXYZ({ x: accelerationX, y: accelerationY, z: accelerationZ });
-        setIsCanShowDeviceXYZ(false);
-        setTimeout(() => {
-          setIsCanShowDeviceXYZ(true);
-        }, 1000);
       }
+      return () => {
+        // remove the event listener
+        console.log("remove devicemotion");
+        window.removeEventListener("devicemotion", processEvent);
+      };
     }
-    return () => {
-      // remove the event listener
-      console.log("remove devicemotion");
-      window.removeEventListener("devicemotion", processEvent);
-    };
   }, []);
 
   // 左上到右上 123, 左下到右下 456
@@ -165,11 +156,6 @@ export function MindMagicPage() {
 
   return (
     <div className="App">
-      <p>xxxx</p>
-      <p>xxxx</p>
-      <p className="color-white">===== {deviceXYZ.x}</p>
-      <p className="color-white">===== {deviceXYZ.y}</p>
-      <p className="color-white">===== {deviceXYZ.z}</p>
       <PokerCard
         cardLocation={{ x: topLeftCardX, y: topLineY }}
         cardWidth={cardWidth}

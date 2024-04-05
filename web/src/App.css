@@ -20,6 +20,18 @@
   }
 }
 
+@keyframes zoomOutCard{
+  from{
+    height: 41vh;
+    width: 29.81vh;
+  }
+  to{
+    height: 0px;
+    width: 0px;
+    display: none;
+  }
+}
+
 .colorWhite {
   color: aliceblue;
 }

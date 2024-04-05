@@ -8,10 +8,8 @@ import { useRef } from 'react';
 import { createNanoEvents } from 'nanoevents'
 
 
-
 // 測試方法 emitter.emit('down')
 // 則卡片會移動
-
 
 
 window.emitter = createNanoEvents();
@@ -30,7 +28,6 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
   const clipPathSetting = getPokerCardClipPath(cardId);
   const [cardStyle, setCardStyle] = useState({"clipPath": clipPathSetting});
 
-
   const [firstTimeToZeroTimeoutIdArray, setFirstTimeToZeroTimeoutIdArray] = useState([]);
 
   const [cardPosition, setCardPosition] = useState({x: cardLocation.x, y: cardLocation.y});
@@ -48,7 +45,6 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
   });
 
   if (isSettedStopEvent.current === false) {
-    console.log("franky-test: ");
     isSettedStopEvent.current = true;
     window.emitter.on('stop', (stopCardId) => {
       console.log("call stop cardId:", stopCardId);
@@ -70,8 +66,8 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
 
         let newStyle = preStyle;
         if (nextClickToHideCard) {
-          newStyle["animationName"] = "displayCard";
-          newStyle["animationDuration"] = "2s";
+          newStyle["animationName"] = "zoomOutCard";
+          newStyle["animationDuration"] = "6s";
           newStyle["animationFillMode"] = "forwards";
 
         }
@@ -243,8 +239,8 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
       <div>
         <img
           ref={imgRef}
-          src={showCardSrc}
           width={cardWidth}
+          src={showCardSrc}
           alt="card"
           draggable="false"
         />
