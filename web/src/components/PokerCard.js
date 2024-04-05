@@ -66,7 +66,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
 
         let newStyle = preStyle;
         if (nextClickToHideCard) {
-          newStyle["animationName"] = "zoomOutCard";
+          newStyle["animationName"] = "displayCard";
           newStyle["animationDuration"] = "6s";
           newStyle["animationFillMode"] = "forwards";
 
