@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { MindMagicPage } from "./pages/MindMagicPage";
+import 'materialize-css/dist/css/materialize.min.css'
 
 const renderReactDom = () => {
   const root = ReactDOM.createRoot(document.getElementById("root"));

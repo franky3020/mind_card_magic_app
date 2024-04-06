@@ -6,7 +6,7 @@ export default function App() {
   return (
     <div className="App">
       <Link to="/magicPage">
-        <button>Start</button>
+        <button className="btn waves-effect waves-light">Start</button>
       </Link>
     </div>
   );
