@@ -35,3 +35,29 @@
 .colorWhite {
   color: aliceblue;
 }
+
+
+/* 手動引入 tailwindcss style */
+
+.TAIL-flex {
+  display: flex;
+}
+
+/* TAIL-w-10/12 */
+.TAIL-w-10\/12 {
+  width: 83.333333%;
+}
+
+.TAIL-justify-center {
+  justify-content: center;
+}
+
+.TAIL-my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.TAIL-text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
