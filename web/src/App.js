@@ -13,13 +13,15 @@ export default function App() {
 
       <div className="TAIL-flex TAIL-justify-center TAIL-my-8">
         <Link to="/magicPage">
-          <button className="btn grey lighten-5 waves-effect waves-light btn-large pulse">Start</button>
+          <button className="no-uppercase grey darken-1 waves-effect waves-light btn-large pulse flow-text">
+            Start
+          </button>
         </Link>
       </div>
 
       <div className="TAIL-flex TAIL-justify-center TAIL-my-8">
         <Link to="/magicPage">
-          <button className="btn waves-effect waves-light btn-large">Tutorial</button>
+          <button className="no-uppercase waves-effect grey darken-1 waves-light btn-large flow-text">Learn</button>
         </Link>
       </div>
 

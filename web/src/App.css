@@ -36,6 +36,9 @@
   color: aliceblue;
 }
 
+.no-uppercase {
+  text-transform: unset !important;
+}
 
 /* 手動引入 tailwindcss style */
 
