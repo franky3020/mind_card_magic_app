@@ -52,17 +52,10 @@ export function MindMagicPage() {
   console.log("topLineY, bottomLineY", topLineY, bottomLineY);
 
   const [oneCardSrc, setOneCardSrc] = useState(ckCardInfo); // 對應 skCard // 左上
-
-  // const [twoCardSrc, setTwoCardSrc] = useState(hkCardInfo); // 對應 dkCard // 中上 X
   const [twoCardSrc, setTwoCardSrc] = useState(djCardInfo); // 對應 hjCard // 中上
   const [threeCardSrc, setThreeCardSrc] = useState(sqCardInfo); // 對應 cqCard // 右上
-
   const [fourCardSrc, setFourCardSrc] = useState(dqCardInfo); // 對應 hqCard // 左下
-
-  // const [fiveCardSrc, setFiveCardSrc] = useState(sjCardInfo); // 對應 cjCard // 中下 // X
   const [fiveCardSrc, setFiveCardSrc] = useState(hkCardInfo); // 對應 dkCard // 中下
-
-  // const [sixCardSrc, setSixCardSrc] = useState(djCardInfo); // 對應 hjCard   // 右下 // X
   const [sixCardSrc, setSixCardSrc] = useState(sjCardInfo); // 對應 cjCard   // 右下
 
   const [oneCardIsHide, setOneCardIsHide] = useState(false);
@@ -121,14 +114,11 @@ export function MindMagicPage() {
       setOnlyCanFoldCard(false);
 
       setOneCardSrc(skCardInfo);
-      // setTwoCardSrc(dkCardInfo); // hjCard
-      setTwoCardSrc(hjCardInfo); // hjCard
+      setTwoCardSrc(hjCardInfo);
       setThreeCardSrc(cqCardInfo);
       setFourCardSrc(hqCardInfo);
-      // setFiveCardSrc(cjCardInfo); // dkCard
-      setFiveCardSrc(dkCardInfo); // dkCard
-      // setSixCardSrc(hjCardInfo); // cjCard
-      setSixCardSrc(cjCardInfo); // cjCard
+      setFiveCardSrc(dkCardInfo);
+      setSixCardSrc(cjCardInfo);
 
       setTimeout(() => {
         letAllCardToHideMode();
