@@ -21,6 +21,7 @@ import { useState, useEffect } from "react";
 import MagicManage from "../service/MagicManage";
 
 const FreezeCardTimeSpan = 3000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
+const FreezeCardForHideTimeSpan = 6000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
 
 // 把 加速度感應關閉 因為還正在開發中
 const devOpenDevicemotionFeature = false;
@@ -106,7 +107,7 @@ export function MindMagicPage() {
       setTimeout(() => {
         unfreezeAllCard();
         console.log("UnfreezeAllCard");
-      }, FreezeCardTimeSpan);
+      }, FreezeCardForHideTimeSpan);
     }
 
     if (magicManage.isAllCardFold()) {

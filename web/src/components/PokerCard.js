@@ -67,7 +67,7 @@ export function PokerCard({cardLocation, cardWidth, cardImg, tableZoom, onCardCh
         let newStyle = preStyle;
         if (nextClickToHideCard) {
           newStyle["animationName"] = "displayCard";
-          newStyle["animationDuration"] = "6s";
+          newStyle["animationDuration"] = "6s"; // 需對應 FreezeCardForHideTimeSpan
           newStyle["animationFillMode"] = "forwards";
 
         }
