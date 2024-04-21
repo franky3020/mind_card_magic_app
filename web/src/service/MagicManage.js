@@ -5,6 +5,17 @@ class _MagicManage {
     this.tableCardMaxZindex = 0;
     this.cardNumberArray = [];
   }
+
+  showState() {
+    console.log("this.cardNumberArray", this.cardNumberArray);
+    console.log("this.tableCardMaxZindex", this.tableCardMaxZindex);
+  }
+
+  init() {
+    this.tableCardMaxZindex = 0;
+    this.cardNumberArray = [];
+  }
+
   addHideCard(cardNumber) {
     if (this.cardNumberArray.includes(cardNumber) === false) {
       this.cardNumberArray.push(cardNumber);

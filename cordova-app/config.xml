@@ -3,8 +3,8 @@
     android-versionCode="13"
     ios-CFBundleVersion="1.0.0.1"
     xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Princess Card</name>
-    <description>Princess Card</description>
+    <name>Princess Magic</name>
+    <description>Princess Magic</description>
     <author email="210238hwsh@gmail.com">
         Franky Email
     </author>
@@ -60,7 +60,10 @@
 
         <icon src="res/icon/ios/20.png" width="20" height="20" />
 
-        <splash src="res/splash/ios/Default@2x~universal~anyany.png" />
+        <!-- 此無用 -->
+        <!-- <config-file parent="DisplayName" platform="ios" target="*-Info.plist">
+        <string>Princess Magic</string>
+        </config-file> -->
 
     </platform>
 

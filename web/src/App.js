@@ -1,9 +1,14 @@
 import "./App.css";
 import {Link} from "react-router-dom";
 import appLogo from "./assets/app_logo.png";
-
+import MagicManage from "./service/MagicManage";
+import { useEffect } from "react";
 
 export default function App() {
+
+  useEffect(() => {
+    MagicManage.init();
+  }, []);
 
   return (
     <div className="App">

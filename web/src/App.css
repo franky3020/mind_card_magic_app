@@ -64,3 +64,19 @@
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
+
+.TAIL-w-12 {
+  width: 3rem;
+}
+
+.TAIL-absolute {
+  position: absolute;
+}
+
+.TAIL-top-3 {
+  top: 0.75rem;
+}
+
+.TAIL-left-3 {
+  left: 0.75rem;
+}

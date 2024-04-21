@@ -19,6 +19,8 @@ import { cjCardInfo } from "../service/GetPokerCardConfig";
 
 import { useState, useEffect } from "react";
 import MagicManage from "../service/MagicManage";
+import backIcon from "../assets/back.png";
+import {Link} from "react-router-dom";
 
 const FreezeCardTimeSpan = 3000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
 const FreezeCardForHideTimeSpan = 6000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
@@ -27,6 +29,7 @@ const FreezeCardForHideTimeSpan = 6000; // 蓋住6張牌後, 凍結使用者下�
 const devOpenDevicemotionFeature = false;
 
 export function MindMagicPage() {
+
   const width = window.outerWidth;
   const height = window.outerHeight;
 
@@ -69,6 +72,8 @@ export function MindMagicPage() {
   const [onlyCanFoldCard, setOnlyCanFoldCard] = useState(true);
 
   useEffect(() => {
+    console.log("showState");
+    MagicManage.showState()
     if (devOpenDevicemotionFeature) {
       console.log("run useEffect: add devicemotion");
       window.addEventListener("devicemotion", processEvent, true);
@@ -154,8 +159,13 @@ export function MindMagicPage() {
     setAllCardFreeze(false);
   }
 
+ 
+
   return (
     <div className="App">
+      <Link to="/">
+        <img src={backIcon} alt='backIcon' className="TAIL-absolute TAIL-top-3 TAIL-left-3 TAIL-w-12"/>
+      </Link>
       <PokerCard
         cardLocation={{ x: topLeftCardX, y: topLineY }}
         cardWidth={cardWidth}
