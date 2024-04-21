@@ -1,5 +1,6 @@
 import "../App.css";
 import { PokerCard } from "../components/PokerCard";
+import { ReminderDialog } from "../components/ReminderDialog";
 import { CardLocalCalculator } from "../service/CardLocalCalculator";
 
 import { skCardInfo } from "../service/GetPokerCardConfig";
@@ -70,6 +71,8 @@ export function MindMagicPage() {
 
   const [allCardFreeze, setAllCardFreeze] = useState(false);
   const [onlyCanFoldCard, setOnlyCanFoldCard] = useState(true);
+
+  const [isGoHomeDialogOpen, setIsGoHomeDialogOpen] = useState(false);
 
   useEffect(() => {
     console.log("showState");
@@ -159,13 +162,32 @@ export function MindMagicPage() {
     setAllCardFreeze(false);
   }
 
- 
+  function openGoHomeDialog() {
+    setIsGoHomeDialogOpen(true);
+  }
+
+  const dialogStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    zIndex: '2147483647'
+  };
 
   return (
     <div className="App">
-      <Link to="/">
-        <img src={backIcon} alt='backIcon' className="TAIL-absolute TAIL-top-3 TAIL-left-3 TAIL-w-12"/>
-      </Link>
+      {/* <Link to="/"> */}
+        <img src={backIcon} onClick={openGoHomeDialog} alt='backIcon' className="TAIL-absolute TAIL-top-3 TAIL-left-3 TAIL-w-12"/>
+      {/* </Link> */}
+
+      {
+        isGoHomeDialogOpen &&
+        <div style={dialogStyle} >
+          <ReminderDialog></ReminderDialog>
+        </div>
+      }
+
+
       <PokerCard
         cardLocation={{ x: topLeftCardX, y: topLineY }}
         cardWidth={cardWidth}
