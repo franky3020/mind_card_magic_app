@@ -46,6 +46,12 @@
   display: flex;
 }
 
+.TAIL-justify-end {
+  justify-content: flex-end;
+}
+
+
+
 /* TAIL-w-10/12 */
 .TAIL-w-10\/12 {
   width: 83.333333%;
@@ -80,3 +86,4 @@
 .TAIL-left-3 {
   left: 0.75rem;
 }
+

@@ -21,7 +21,7 @@ import { cjCardInfo } from "../service/GetPokerCardConfig";
 import { useState, useEffect } from "react";
 import MagicManage from "../service/MagicManage";
 import backIcon from "../assets/back.png";
-import {Link} from "react-router-dom";
+
 
 const FreezeCardTimeSpan = 3000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
 const FreezeCardForHideTimeSpan = 6000; // 蓋住6張牌後, 凍結使用者下一次消失牌的時間間隔, 防止按太快 誤觸消失卡片
@@ -183,7 +183,8 @@ export function MindMagicPage() {
       {
         isGoHomeDialogOpen &&
         <div style={dialogStyle} >
-          <ReminderDialog></ReminderDialog>
+          <ReminderDialog title='Exit?' message='You will stop this magic and exit'
+          confirmUrl='/' noFunc={() => {setIsGoHomeDialogOpen(false);}}></ReminderDialog>
         </div>
       }
 

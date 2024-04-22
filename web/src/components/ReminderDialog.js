@@ -1,17 +1,23 @@
-export function ReminderDialog() {
+import {Link} from "react-router-dom";
+
+export function ReminderDialog({title, message, confirmUrl, noFunc}) {
   return (
-    <div class="row">
-      <div class="col">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <span class="card-title">Card Title</span>
+    <div className="row">
+      <div className="col">
+        <div className="card blue-grey darken-1">
+          <div className="card-content white-text">
+            <span className="card-title">{title}</span>
             <p>
-              I am a very simple card. I am good at containing small bits of
+              {message}
             </p>
           </div>
-          <div class="card-action">
-            <a href="#">This is a link</a>
-            <a href="#">This is a link</a>
+          <div className="card-action">
+            <div className="TAIL-flex TAIL-justify-end">
+            <p onClick={noFunc}>No</p>
+            <Link to={confirmUrl}>
+              <p>Yes</p>
+            </Link>
+            </div>
           </div>
         </div>
       </div>
