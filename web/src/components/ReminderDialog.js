@@ -6,16 +6,23 @@ export function ReminderDialog({title, message, confirmUrl, noFunc}) {
       <div className="col">
         <div className="card blue-grey darken-1">
           <div className="card-content white-text">
-            <span className="card-title">{title}</span>
-            <p>
+            <h4>
+              {title}
+            </h4>
+            <h5>
               {message}
-            </p>
+            </h5>
           </div>
-          <div className="card-action">
-            <div className="TAIL-flex TAIL-justify-end">
-            <p onClick={noFunc}>No</p>
+          <div className="TAIL-p-2">
+            <div className="TAIL-flex TAIL-justify-end TAIL-justify-between">
+            <button onClick={noFunc} className="no-uppercase grey darken-1 btn-large flow-text">
+              No
+            </button>
+
             <Link to={confirmUrl}>
-              <p>Yes</p>
+              <button onClick={noFunc} className="no-uppercase green lighten-2 darken-1 btn-large flow-text">
+                Yes
+              </button>
             </Link>
             </div>
           </div>
