@@ -3,17 +3,13 @@ import {Link} from "react-router-dom";
 import appLogo from "./assets/app_logo.png";
 import MagicManage from "./service/MagicManage";
 import { useEffect } from "react";
-import axios from 'axios';
+import CheckNeedUpdate from "./CheckNeedUpdate";
 
 export default function App() {
 
   useEffect(() => {
 
-    axios.get('https://b4hqov4gxu2nkkztjvk6amsqba0pwmqx.lambda-url.us-east-2.on.aws/')
-      .then((res) => {
-        console.log(res);
-      })
-
+    CheckNeedUpdate();
 
     MagicManage.init();
   }, []);
