@@ -3,16 +3,24 @@ import {Link} from "react-router-dom";
 import appLogo from "./assets/app_logo.png";
 import MagicManage from "./service/MagicManage";
 import { useEffect } from "react";
-import CheckNeedUpdate from "./CheckNeedUpdate";
+import CheckNeedUpdateForAndroid from "./CheckNeedUpdate";
 
 export default function App() {
 
   useEffect(() => {
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-    CheckNeedUpdate();
-
+    CheckNeedUpdateForAndroid('1.0.0', '24', ()=> { console.log('franky-test')});
     MagicManage.init();
   }, []);
+
+  function onDeviceReady() {
+    console.log("In onDeviceReady device:", window.device);
+
+    window.cordova.cordova.getAppVersion.getVersionNumber().then((version) => {
+      console.log("In onDeviceReady version:", version);
+    });
+  }
 
   return (
     <div className="App">
