@@ -17,7 +17,7 @@ export default function App() {
   function onDeviceReady() {
     console.log("In onDeviceReady device:", window.device);
 
-    window.cordova.cordova.getAppVersion.getVersionNumber().then((version) => {
+    window.cordova.getAppVersion.getVersionNumber().then((version) => {
       console.log("In onDeviceReady version:", version);
     });
   }
