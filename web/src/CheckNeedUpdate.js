@@ -1,16 +1,22 @@
 import axios from 'axios';
 
-// interface CheckVersionRes {
+// res e.g.
+// {
 //     lastVersion: {
-//         miniOS: string,
-//         minSDK: string,
-//         version: string
-//     };
-//     versionDict: 
-//     firstName: string;
+//         miniOS: "11.0",
+//         minSDK: "24",
+//         version: "1.0.0"
+//     },
+//     versionDict: {
+//         1.0.0: {
+//         miniOS: "11.0",
+//         minSDK: "24",
+//         forceUpdate: false
+//         }
+//     }
 // }
 
-// 如果 是 android 裝置 則 deviceIOSVersion 傳入字串
+// deviceSDKVersion 傳入字串
 export default function CheckNeedUpdateForAndroid (currentVersion, deviceSDKVersion, callback) {
 
     if (typeof deviceSDKVersion === "undefined" ||

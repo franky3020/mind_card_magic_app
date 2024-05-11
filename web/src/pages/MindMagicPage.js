@@ -176,15 +176,19 @@ export function MindMagicPage() {
 
   return (
     <div className="App">
-      {/* <Link to="/"> */}
-        <img src={backIcon} onClick={openGoHomeDialog} alt='backIcon' className="TAIL-absolute TAIL-top-3 TAIL-left-3 TAIL-w-12"/>
-      {/* </Link> */}
+      <img src={backIcon} onClick={openGoHomeDialog} alt='backIcon' className="TAIL-absolute TAIL-top-3 TAIL-left-3 TAIL-w-12"/>
 
       {
         isGoHomeDialogOpen &&
         <div style={dialogStyle} >
           <ReminderDialog title='Exit?' message='You will stop this magic and exit'
-          confirmUrl='/' noFunc={() => {setIsGoHomeDialogOpen(false);}}></ReminderDialog>
+          confirmFunc={() => {
+            window.location.replace('/');
+          }}
+          noFunc={() => {
+            setIsGoHomeDialogOpen(false);
+          }}>
+          </ReminderDialog>
         </div>
       }
 
