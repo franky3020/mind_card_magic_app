@@ -1,6 +1,4 @@
-import {Link} from "react-router-dom";
-
-export function ReminderDialog({title, message, confirmUrl, noFunc}) {
+export function ReminderDialog({title, message, noFunc, confirmFunc}) {
   return (
     <div className="row">
       <div className="col">
@@ -19,11 +17,9 @@ export function ReminderDialog({title, message, confirmUrl, noFunc}) {
               No
             </button>
 
-            <Link to={confirmUrl}>
-              <button onClick={noFunc} className="no-uppercase green lighten-2 darken-1 btn-large flow-text">
-                Yes
-              </button>
-            </Link>
+            <button onClick={confirmFunc} className="no-uppercase green lighten-2 darken-1 btn-large flow-text">
+              Yes
+            </button>
             </div>
           </div>
         </div>
