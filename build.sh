@@ -1,5 +1,6 @@
 cd web
 rm -rf ./node_modules
+rm -rf ./build
 npm i
 npm run build
 
@@ -7,6 +8,7 @@ npm run build
 cd ../cordova-app
 rm -rf www
 rm -rf platforms
+rm -rf plugins
 cp -r ../web/build ./www
 touch ./www/.gitkeeper
 rm -rf ./node_modules
