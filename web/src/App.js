@@ -3,22 +3,27 @@ import {Link} from "react-router-dom";
 import appLogo from "./assets/app_logo.png";
 import MagicManage from "./service/MagicManage";
 import { useEffect } from "react";
-import CheckNeedUpdateForAndroid from "./CheckNeedUpdate";
+import { CheckNeedUpdateForAndroid, CheckNeedUpdateForiOS } from "./CheckNeedUpdate";
 
 export default function App() {
 
   useEffect(() => {
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    CheckNeedUpdateForAndroid('1.0.0', '24', ()=> { console.log('franky-test')});
     MagicManage.init();
   }, []);
 
   function onDeviceReady() {
     console.log("In onDeviceReady device:", window.device);
 
-    window.cordova.getAppVersion.getVersionNumber().then((version) => {
-      console.log("In onDeviceReady version:", version);
+    window.cordova.getAppVersion.getVersionNumber().then((versionNumber) => {
+      console.log("versionNumber:", versionNumber);
+      if (window.device.platform === "Android") {
+        CheckNeedUpdateForAndroid(versionNumber, window.device.sdkVersion, ()=> { console.log('need update for Android')});
+      } else {
+        // window.device.version 是指 iOS 版本
+        CheckNeedUpdateForiOS(versionNumber, window.device.version, ()=> { console.log('need update for iOS')});
+      }
     });
   }
 
