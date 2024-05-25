@@ -27,6 +27,10 @@ export default function App() {
     });
   }
 
+  function goToLearnVedio() {
+    window.open('https://www.youtube.com/watch?v=6DfUauc_3g4', '_system');
+  }
+
   return (
     <div className="App">
       <div className="TAIL-flex TAIL-justify-center TAIL-my-8">
@@ -42,9 +46,7 @@ export default function App() {
       </div>
 
       <div className="TAIL-flex TAIL-justify-center TAIL-my-8">
-        <Link to="/magicPage">
-          <button className="no-uppercase waves-effect grey darken-1 waves-light btn-large flow-text">Learn</button>
-        </Link>
+        <button onClick={goToLearnVedio} className="no-uppercase waves-effect grey darken-1 waves-light btn-large flow-text">Learn</button>
       </div>
 
     </div>
