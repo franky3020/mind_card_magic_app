@@ -2,19 +2,13 @@ import "./App.css";
 import { Link } from "react-router-dom";
 import appLogo from "./assets/app_logo.png";
 import MagicManage from "./service/MagicManage";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   CheckNeedUpdateForAndroid,
   CheckNeedUpdateForiOS,
 } from "./CheckNeedUpdate";
 
 import { ReminderDialog } from "./components/ReminderDialog";
-
-// ios 商店連結
-// https://apps.apple.com/us/app/princess-card-magic-trick/id6480343480
-
-// play 商店連結
-// https://play.google.com/store/apps/details?id=tw.franky.princesscard
 
 const dialogStyle = {
   position: "absolute",
@@ -25,14 +19,13 @@ const dialogStyle = {
 };
 
 export default function App() {
-  // 如果要測試強制更新UI 則把此開關打開
-  let showForceUpdate = false;
+
+  const [showForceUpdate, setShowForceUpdate] = useState(false);
 
   let runPlatform = "";
 
   useEffect(() => {
     document.addEventListener("deviceready", onDeviceReady, false);
-
     MagicManage.init();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -48,13 +41,13 @@ export default function App() {
           versionNumber,
           window.device.sdkVersion,
           () => {
-            showForceUpdate = true;
+            setShowForceUpdate(true);
           }
         );
       } else {
         // window.device.version 是指 iOS 版本
         CheckNeedUpdateForiOS(versionNumber, window.device.version, () => {
-          showForceUpdate = true;
+          setShowForceUpdate(true);
         });
       }
     });
