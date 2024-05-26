@@ -34,6 +34,7 @@ export default function App() {
     document.addEventListener("deviceready", onDeviceReady, false);
 
     MagicManage.init();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function onDeviceReady() {
@@ -79,7 +80,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <div className="TAIL-flex TAIL-justify-center TAIL-my-8">
+      <div onClick={goToStore} className="TAIL-flex TAIL-justify-center TAIL-my-8">
         <img src={appLogo} alt="appLogo" className="TAIL-w-10/12" />
       </div>
 

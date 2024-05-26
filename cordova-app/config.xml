@@ -16,7 +16,20 @@
     <preference name="DisallowOverscroll" value="true" />
 
     <!-- Platform Configs & Platform Overriding Configs -->
-    <platform name="android"></platform>
+    <platform name="android">
+        <allow-intent href="market:*" />
+
+        <!-- TODO: 待新增 -->
+        <!-- <resource-file src="res/splash/android/splash.png" target="app/src/main/res/drawable/splash.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/splash/android/splash.xml" />
+
+        <icon background="res/icon/android/mipmap-mdpi/ic_launcher_background.png" density="mdpi" foreground="res/icon/android/mipmap-mdpi/ic_launcher_foreground.png" />
+        <icon background="res/icon/android/mipmap-hdpi/ic_launcher_background.png" density="hdpi" foreground="res/icon/android/mipmap-hdpi/ic_launcher_foreground.png" />
+        <icon background="res/icon/android/mipmap-xhdpi/ic_launcher_background.png" density="xhdpi" foreground="res/icon/android/mipmap-xhdpi/ic_launcher_foreground.png" />
+        <icon background="res/icon/android/mipmap-xxhdpi/ic_launcher_background.png" density="xxhdpi" foreground="res/icon/android/mipmap-xxhdpi/ic_launcher_foreground.png" />
+        <icon background="res/icon/android/mipmap-xxxhdpi/ic_launcher_background.png" density="xxxhdpi" foreground="res/icon/android/mipmap-xxxhdpi/ic_launcher_foreground.png" /> -->
+
+    </platform>
     <platform name="ios">
         <preference name="deployment-target" value="12.0" />
         <preference name="scheme" value="app" />

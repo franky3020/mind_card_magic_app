@@ -4,6 +4,13 @@ node: 18.17.0
 ## Android
 SDK=33.0.2
 
+## iOS 打包手動流程
+需要在Privacylinfo.xcprivacy 的 Privacy Accessed API Types 加入一個item
+內容type 設定為 User Defauls
+reason 要加一個 item
+設定為 CA92.1
+
+
 ## 第一階段上線功能:
 * 需要加上版本檢查與強制更新機制
 * 研究商店如何內購選項
