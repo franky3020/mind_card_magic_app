@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="tw.franky.princesscard" version="1.0.0"
+<widget id="tw.franky.princesscard" version="1.0.1"
     android-versionCode="13"
-    ios-CFBundleVersion="1.0.0.1"
+    ios-CFBundleVersion="1.0.1.0"
     xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Princess Magic</name>
     <description>Princess Magic</description>
@@ -34,6 +34,8 @@
         <preference name="deployment-target" value="12.0" />
         <preference name="scheme" value="app" />
         <preference name="SuppressesLongPressGesture" value="true" />
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
         <!-- 讓apple 不會一直問有沒有加密 -->
         <edit-config file="*-Info.plist" mode="add" target="ITSAppUsesNonExemptEncryption">
             <false/>
