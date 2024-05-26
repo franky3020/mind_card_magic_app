@@ -1,9 +1,12 @@
 import "./App.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import appLogo from "./assets/app_logo.png";
 import MagicManage from "./service/MagicManage";
 import { useEffect } from "react";
-import { CheckNeedUpdateForAndroid, CheckNeedUpdateForiOS } from "./CheckNeedUpdate";
+import {
+  CheckNeedUpdateForAndroid,
+  CheckNeedUpdateForiOS,
+} from "./CheckNeedUpdate";
 
 import { ReminderDialog } from "./components/ReminderDialog";
 
@@ -14,16 +17,14 @@ import { ReminderDialog } from "./components/ReminderDialog";
 // https://play.google.com/store/apps/details?id=tw.franky.princesscard
 
 const dialogStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  zIndex: '2147483647'
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  zIndex: "2147483647",
 };
 
-
 export default function App() {
-
   // 如果要測試強制更新UI 則把此開關打開
   let showForceUpdate = false;
 
@@ -42,30 +43,44 @@ export default function App() {
       console.log("versionNumber:", versionNumber);
       runPlatform = window.device.platform;
       if (window.device.platform === "Android") {
-        CheckNeedUpdateForAndroid(versionNumber, window.device.sdkVersion, ()=> { showForceUpdate = true });
+        CheckNeedUpdateForAndroid(
+          versionNumber,
+          window.device.sdkVersion,
+          () => {
+            showForceUpdate = true;
+          }
+        );
       } else {
         // window.device.version 是指 iOS 版本
-        CheckNeedUpdateForiOS(versionNumber, window.device.version, ()=> { showForceUpdate = true });
+        CheckNeedUpdateForiOS(versionNumber, window.device.version, () => {
+          showForceUpdate = true;
+        });
       }
     });
   }
 
   function goToLearnVedio() {
-    window.open('https://www.youtube.com/watch?v=6DfUauc_3g4', '_system');
+    window.open("https://www.youtube.com/watch?v=6DfUauc_3g4", "_system");
   }
 
   function goToStore() {
     if (runPlatform === "Android") {
-      window.open('https://play.google.com/store/apps/details?id=tw.franky.princesscard', '_system');
+      window.open(
+        "https://play.google.com/store/apps/details?id=tw.franky.princesscard",
+        "_system"
+      );
     } else {
-      window.open('https://apps.apple.com/us/app/princess-card-magic-trick/id6480343480', '_system');
+      window.open(
+        "https://apps.apple.com/us/app/princess-card-magic-trick/id6480343480",
+        "_system"
+      );
     }
   }
 
   return (
     <div className="App">
       <div className="TAIL-flex TAIL-justify-center TAIL-my-8">
-        <img src={appLogo} alt='appLogo' className="TAIL-w-10/12"/>
+        <img src={appLogo} alt="appLogo" className="TAIL-w-10/12" />
       </div>
 
       <div className="TAIL-flex TAIL-justify-center TAIL-my-8">
@@ -77,24 +92,27 @@ export default function App() {
       </div>
 
       <div className="TAIL-flex TAIL-justify-center TAIL-my-8">
-        <button onClick={goToLearnVedio} className="no-uppercase waves-effect grey darken-1 waves-light btn-large flow-text">Learn</button>
+        <button
+          onClick={goToLearnVedio}
+          className="no-uppercase waves-effect grey darken-1 waves-light btn-large flow-text"
+        >
+          Learn
+        </button>
       </div>
       {showForceUpdate && (
-      <div style={dialogStyle} >
-        <ReminderDialog title='New App release' message='You need to update'
+        <div style={dialogStyle}>
+          <ReminderDialog
+            title="New App release"
+            message="You need to update"
             confirmFunc={() => {
               goToStore();
             }}
-            noFunc={() => {
-            }}
+            noFunc={() => {}}
             confirmBtnText="Go!"
-            onlyConfirm = {true}
-            >
-        </ReminderDialog>
-      </div>
-      )
-      }
-
+            onlyConfirm={true}
+          ></ReminderDialog>
+        </div>
+      )}
     </div>
   );
 }
