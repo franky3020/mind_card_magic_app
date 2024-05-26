@@ -21,8 +21,8 @@ const dialogStyle = {
 export default function App() {
 
   const [showForceUpdate, setShowForceUpdate] = useState(false);
+  const [runPlatform, setRunPlatform] = useState("");
 
-  let runPlatform = "";
 
   useEffect(() => {
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -35,7 +35,7 @@ export default function App() {
 
     window.cordova.getAppVersion.getVersionNumber().then((versionNumber) => {
       console.log("versionNumber:", versionNumber);
-      runPlatform = window.device.platform;
+      setRunPlatform(window.device.platform);
       if (window.device.platform === "Android") {
         CheckNeedUpdateForAndroid(
           versionNumber,
