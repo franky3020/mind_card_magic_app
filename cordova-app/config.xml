@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="tw.franky.princesscard"
-    version="1.0.1"
-    ios-CFBundleVersion="1.0.1.0"
+    version="1.0.3"
+    ios-CFBundleVersion="1.0.3.0"
     xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Princess Magic</name>
     <description>Princess Magic</description>
